@@ -1,0 +1,32 @@
+export enum KeyEnum {
+  C = "C",
+  Db = "Db",
+  D = "D",
+  Eb = "Eb",
+  E = "E",
+  F = "F",
+  Gb = "Gb",
+  G = "G",
+  Ab = "Ab",
+  A = "A",
+  Bb = "Bb",
+  B = "B",
+}
+
+export enum FlavourEnum {
+  Major = "Major",
+  Minor = "Minor",
+  Diminished = "Diminished",
+  Augmented = "Augmented",
+  Minor7 = "Minor7",
+  Major7 = "Major7",
+  Dominant7 = "Dominant7",
+  Diminished7 = "Diminished7",
+  Augmented7 = "Augmented7",
+  HalfDiminished7 = "HalfDiminished7",
+  Minor9 = "Minor9",
+  Major9 = "Major9",
+  Dominant9 = "Dominant9",
+  Minor11 = "Minor11",
+  Major11 = "Major11",
+}
