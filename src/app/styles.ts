@@ -7,7 +7,7 @@ export const Modal = styled.div`
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 `
 export const ModalHead = styled.h2``
-export const ModalBody = styled.p``
+export const ModalBody = styled.div``
 export const ModalFoot = styled.div``
 
 export const SaveButton = styled.button``

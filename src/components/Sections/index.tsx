@@ -12,7 +12,7 @@ export default function Sections() {
         <StyledSection key={section.id}>
           <Loops>Repeat: {section.repeatCount} times</Loops>
           {section.chords.map((chord) => (
-            <Chord chord={chord} />
+            <Chord key={chord.id} chord={chord} />
           ))}
           <AddChordButton sectionId={section.id} />
         </StyledSection>

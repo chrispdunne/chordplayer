@@ -1,22 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../app/store"
-
-export type Id = number
-
-export interface Chord {
-  id: Id
-  key: string
-  flavour: string
-  length: number
-}
-
-export interface Section {
-  id: Id
-  chords: Chord[]
-  repeatCount: number
-  timeSignature?: string
-  bpm?: number
-}
+import { Chord, Id, Section } from "../types"
 
 const initialState: Section[] = []
 

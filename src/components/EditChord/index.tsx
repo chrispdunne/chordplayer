@@ -17,9 +17,12 @@ import KeySelect from "./KeySelect"
 import FlavourSelect from "./FlavourSelect"
 import LengthInput from "./LengthInput"
 import { useState } from "react"
-import { flavours, keys } from "../../const/keys"
 import { useDispatch } from "react-redux"
 import { addChord, updateChord } from "../../store/sectionsSlice"
+import { getFlavourEnumKeys, getKeyEnumKeys } from "../../types"
+
+const keys = getKeyEnumKeys()
+const flavours = getFlavourEnumKeys()
 
 export default function EditChord() {
   const dispatch = useDispatch()
@@ -29,8 +32,8 @@ export default function EditChord() {
     useAppSelector(selectView) === "editChord" && sectionId !== null
   const activeChordId = useAppSelector(selectActiveChord)
 
-  const [key, setKey] = useState(keys[0])
-  const [flavour, setFlavour] = useState(flavours[0])
+  const [key, setKey] = useState<number>(0)
+  const [flavour, setFlavour] = useState<string>(flavours[0])
   const [length, setLength] = useState(1)
 
   const handleSaveChord = isVisible
@@ -55,7 +58,7 @@ export default function EditChord() {
       <ModalHead>{activeChordId !== null ? "Edit" : "Add"} Chord</ModalHead>
 
       <ModalBody>
-        <KeySelect value={key} onChange={setKey} />
+        <KeySelect value={String(key)} onChange={(v) => setKey(Number(v))} />
         <FlavourSelect value={flavour} onChange={setFlavour} />
         <LengthInput value={length} onChange={setLength} />
       </ModalBody>

@@ -1,6 +1,7 @@
-import { flavours } from "../../const/keys"
+import { getFlavourEnumKeys } from "../../types"
 import Select from "../Select"
 
+const flavours = getFlavourEnumKeys()
 interface Props {
   value: string
   onChange: (value: string) => void
