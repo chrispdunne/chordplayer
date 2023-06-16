@@ -1,6 +1,6 @@
 import * as Tone from 'tone';
 import { getChordNotes } from './getChordNotes';
-import { Chord, Section } from '../types';
+import { Chord, Id, Section } from '../types';
 import { getTotalMeasureCount } from './getTotalMeasureCount';
 
 const getTimeCode = (measureCount: number) =>
@@ -10,12 +10,15 @@ function playSectionChords(
 	chords: Chord[],
 	synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>,
 	repeatCount: number,
-	measureCount: number
+	measureCount: number,
+	setCurrentChord: (chordId: Id) => {
+		payload: any;
+		type: 'app/setActiveChord';
+	}
 ) {
 	let measures = { count: measureCount };
 	for (let n = 0; n < repeatCount; n++) {
 		chords.forEach((chord, i) => {
-			// get key     // get chord type
 			const { key, flavour } = chord;
 
 			// get chord notes
@@ -25,11 +28,10 @@ function playSectionChords(
 
 			for (let x = 0; x < chord.length; x++) {
 				const timeCode = getTimeCode(measures.count);
-				// console.log({ timeCode });
-				Tone.Transport.schedule(time => {
-					// update currently selected chord in UI
-					// console.log('playing chord', { time, measures });
 
+				Tone.Transport.schedule(time => {
+					// set active chord
+					setCurrentChord(chord.id);
 					// play chord
 					notes.forEach(note => synth.triggerAttack(note, time));
 					synth.triggerRelease(notes, time + 1);
@@ -44,7 +46,11 @@ function playSectionChords(
 
 export function playChords(
 	synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>,
-	sections: Section[]
+	sections: Section[],
+	setCurrentChord: (chordId: Id) => {
+		payload: any;
+		type: 'app/setActiveChord';
+	}
 ) {
 	const totalMeasureCount = getTotalMeasureCount(sections);
 	const endOfChordsTimeCode = getTimeCode(totalMeasureCount);
@@ -55,7 +61,8 @@ export function playChords(
 			section.chords,
 			synth,
 			section.repeatCount,
-			measureCount
+			measureCount,
+			setCurrentChord
 		);
 	});
 
@@ -65,8 +72,3 @@ export function playChords(
 		Tone.Transport.start();
 	}, endOfChordsTimeCode);
 }
-
-// X1 X2
-// Y1 Y2 Y3 Y4
-// X1 X2
-// Y1 Y2 Y3 Y4

@@ -1,7 +1,10 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
-export const StyledChord = styled.div`
-  background-color: #ddd;
-`
-export const ChordName = styled.div``
-export const ChordLength = styled.div``
+interface StyledChordProps {
+	readonly active: boolean;
+}
+export const StyledChord = styled.div<StyledChordProps>`
+	background-color: ${({ active }) => (active ? 'red' : '#ddd')};
+`;
+export const ChordName = styled.div``;
+export const ChordLength = styled.div``;
