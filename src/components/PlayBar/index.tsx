@@ -19,7 +19,7 @@ export default function PlayBar() {
 		if (isPlaying) {
 			// STOP
 
-			Tone.Transport.clearAll();
+			Tone.Transport.cancel();
 			Tone.Transport.stop(); //.pause()?
 			synth.releaseAll();
 		} else {
