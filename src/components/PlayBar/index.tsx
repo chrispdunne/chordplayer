@@ -20,7 +20,8 @@ export default function PlayBar() {
 	const isDisabled =
 		useAppSelector(selectSections).length === 0 && !isPlaying;
 	const sections = useAppSelector(state => state.sections);
-	const setCurrentChord = (chordId: Id) => dispatch(setActiveChord(chordId));
+	const setCurrentChord = (chordId: Id | null) =>
+		dispatch(setActiveChord(chordId));
 	const handlePlay = () => {
 		dispatch(setMode(isPlaying ? 'edit' : 'play'));
 
@@ -30,6 +31,7 @@ export default function PlayBar() {
 			Tone.Transport.cancel();
 			Tone.Transport.stop(); //.pause()?
 			synth.releaseAll();
+			setCurrentChord(null);
 		} else {
 			synth.releaseAll();
 

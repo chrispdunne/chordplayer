@@ -7,7 +7,8 @@ export const StyledSection = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1rem;
-	padding: 2rem;
+	padding: 9px;
 	margin: 3rem 1rem 1rem;
 	position: relative;
+	min-height: 50px;
 `;

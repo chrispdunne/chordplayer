@@ -14,13 +14,13 @@ export const sectionsSlice = createSlice({
 		removeSection: (state, action: PayloadAction<number>) => {
 			state = state.filter(section => section.id !== action.payload);
 		},
-		updateSection: (state, action: PayloadAction<Partial<Section>>) => {
-			state = state.map(section =>
+		updateSection: (state, action: PayloadAction<Partial<Section>>) =>
+			state.map(section =>
 				section.id === action.payload.id
 					? { ...section, ...action.payload }
 					: section
-			);
-		},
+			),
+
 		addChord: (
 			state,
 			action: PayloadAction<{ sectionId: Id; chord: Chord }>

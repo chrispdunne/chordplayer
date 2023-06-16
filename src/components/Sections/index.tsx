@@ -11,7 +11,10 @@ export default function Sections() {
 		<>
 			{sections.map(section => (
 				<StyledSection key={section.id}>
-					<EditSectionRepeatButton count={section.repeatCount} />
+					<EditSectionRepeatButton
+						count={section.repeatCount}
+						id={section.id}
+					/>
 					{section.chords.map(chord => (
 						<Chord key={chord.id} chord={chord} />
 					))}
