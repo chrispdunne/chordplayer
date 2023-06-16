@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { StyledAddButton } from '../Buttons/AddSectionButton/styles';
-import PlayIcon from '../Icons/PlayIcon';
 
 export const StyledPlayBar = styled.div`
 	position: fixed;
@@ -36,7 +35,7 @@ export const PlayButton = styled(StyledAddButton)`
 `;
 
 export const OtherButtons = styled.div`
-	padding: 50px 20px;
+	padding: 25px 20px 50px;
 	display: flex;
 	justify-content: space-between;
 	color: var(--foreground);
@@ -47,7 +46,7 @@ export const OtherButton = styled.button`
 	color: var(--foreground);
 	background: transparent;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: bold;
 `;

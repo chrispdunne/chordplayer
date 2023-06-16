@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { selectMode, setActiveChord, setMode } from '../../store/appSlice';
-import { OtherButton, OtherButtons, PlayButton, StyledPlayBar } from './styles';
+import { OtherButtons, PlayButton, StyledPlayBar } from './styles';
 import * as Tone from 'tone';
 import { playChords } from '../../utils/playChords';
 import { Id } from '../../types';
-import NoteIcon from '../Icons/NoteIcon';
-import MetronomeIcon from '../Icons/MetronomeIcon';
 import PlayIcon from '../Icons/PlayIcon';
 import PauseIcon from '../Icons/PauseIcon';
 import { selectSections } from '../../store/sectionsSlice';
+import BpmEdit from './BpmEdit';
+import TimeSignatureEdit from './TimeSignatureEdit';
 
 // create synth once
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
@@ -49,15 +49,8 @@ export default function PlayBar() {
 				{isPlaying ? <PauseIcon /> : <PlayIcon />}
 			</PlayButton>
 			<OtherButtons>
-				<OtherButton title="change bpm" aria-label="change bpm">
-					<NoteIcon /> 120bpm
-				</OtherButton>
-				<OtherButton
-					title="change time signature"
-					aria-label="change time signature"
-				>
-					<MetronomeIcon /> 3/4
-				</OtherButton>
+				<BpmEdit />
+				<TimeSignatureEdit />
 			</OtherButtons>
 		</StyledPlayBar>
 	);

@@ -44,3 +44,12 @@ export const ModalCloseButton = styled.button`
 		content: '+';
 	}
 `;
+
+export const NumberInput = styled.input.attrs({ type: 'number' })`
+	background: transparent;
+	border: 0;
+	color: var(--foreground);
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+`;

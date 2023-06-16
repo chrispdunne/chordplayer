@@ -6,6 +6,7 @@ import {
 	ModalCloseButton,
 	ModalFoot,
 	ModalHead,
+	NumberInput,
 	SaveButton
 } from '../../app/styles';
 import { selectActiveSection, selectView, setView } from '../../store/appSlice';
@@ -42,8 +43,7 @@ export default function EditSection() {
 			<ModalHead>{activeSectionId ? 'Edit' : 'Add'} Section</ModalHead>
 			<ModalBody>
 				Repeat section{' '}
-				<input
-					type="number"
+				<NumberInput
 					min={1}
 					max={99}
 					value={repeatCount}
