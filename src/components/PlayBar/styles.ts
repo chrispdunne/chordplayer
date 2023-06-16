@@ -19,6 +19,9 @@ export const StyledPlayBar = styled.div`
 	}
 `;
 export const PlayButton = styled(StyledAddButton)`
+	width: 60px;
+	height: 60px;
+	outline-width: 10px;
 	border-radius: 100%;
 	position: absolute;
 	top: -60px;
@@ -35,7 +38,7 @@ export const PlayButton = styled(StyledAddButton)`
 `;
 
 export const OtherButtons = styled.div`
-	padding: 25px 20px 50px;
+	padding: 15px 20px 50px;
 	display: flex;
 	justify-content: space-between;
 	color: var(--foreground);

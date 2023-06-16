@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Modal = styled.div`
 	position: fixed;
 	z-index: var(--z-index-modal);
-	inset: 40px;
+	inset: 20px;
 	border: 1px solid var(--border-color);
 	border-radius: 7px;
 	background-color: var(--off-background);

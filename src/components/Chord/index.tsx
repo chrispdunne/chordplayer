@@ -10,7 +10,7 @@ export default function Chord({ chord }: { chord: ChordType }) {
 			<ChordName>
 				{KeyEnum[chord.key]} {chord.flavour}
 			</ChordName>
-			<ChordLength> {chord.length}</ChordLength>
+			{/* <ChordLength> {chord.length}</ChordLength> */}
 		</StyledChord>
 	);
 }

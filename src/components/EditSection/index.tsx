@@ -49,7 +49,7 @@ export default function EditSection() {
 					value={repeatCount}
 					onChange={e => setRepeatCount(e.target.valueAsNumber)}
 				/>{' '}
-				times
+				time{repeatCount > 1 && 's'}
 			</ModalBody>
 			<ModalFoot>
 				<SaveButton onClick={handleSaveSection}>

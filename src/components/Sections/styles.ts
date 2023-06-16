@@ -6,9 +6,9 @@ export const StyledSection = styled.div`
 	border-radius: 7px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 1rem;
+	gap: 10px;
 	padding: 9px;
-	margin: 3rem 1rem 1rem;
+	margin: 52px 10px 10px;
 	position: relative;
 	min-height: 50px;
 `;

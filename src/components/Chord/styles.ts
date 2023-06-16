@@ -9,7 +9,13 @@ export const StyledChord = styled.div<StyledChordProps>`
 	color: ${({ active }) =>
 		active ? 'var(--background)' : 'var(--foreground)'};
 	border-radius: 4px;
-	padding: 10px 4px;
+	padding: 20px 4px;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 export const ChordName = styled.div``;
 export const ChordLength = styled.div``;

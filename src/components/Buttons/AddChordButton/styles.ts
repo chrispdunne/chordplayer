@@ -10,7 +10,7 @@ export const StyledAddChordButton = styled(StyledAddButton)`
 	bottom: 0;
 	right: 0;
 	margin: 0;
-	bottom: -24px;
+	bottom: -23px;
 	right: 15px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
