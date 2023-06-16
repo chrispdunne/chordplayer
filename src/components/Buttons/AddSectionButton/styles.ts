@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const StyledAddButton = styled.button`
+interface AddButtonProps {
+	hasNoSections: boolean;
+}
+
+export const StyledAddButton = styled.button<AddButtonProps>`
 	transition: all 0.25s ease-in-out;
 	cursor: pointer;
 	color: var(--foreground);
@@ -10,6 +14,7 @@ export const StyledAddButton = styled.button`
 	font-weight: bold;
 	width: 50px;
 	height: 50px;
+	min-height: 50px;
 	border-radius: 3px;
 	border: 0;
 	outline: 8px solid var(--off-background);
@@ -19,4 +24,9 @@ export const StyledAddButton = styled.button`
 		background-color: var(--background);
 		color: var(--orange);
 	}
+	${({ hasNoSections }) =>
+		!hasNoSections &&
+		css`
+			margin-bottom: 100px;
+		`}
 `;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface StyledChordProps {
 	readonly active: boolean;
+	readonly length: number;
 }
 export const StyledChord = styled.div<StyledChordProps>`
 	background-color: ${({ active }) =>
@@ -16,6 +17,7 @@ export const StyledChord = styled.div<StyledChordProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	/* grid-column: ${({ length }) => `span ${length}`};
+	grid-row: ${({ length }) => `span ${length}`}; */
 `;
 export const ChordName = styled.div``;
-export const ChordLength = styled.div``;

@@ -15,7 +15,7 @@ export default function ChordSections() {
 			<EditSection />
 			<EditChord />
 			<Sections />
-			<AddSectionButton />
+			<AddSectionButton hasNoSections={hasNoSections} />
 		</Container>
 	);
 }

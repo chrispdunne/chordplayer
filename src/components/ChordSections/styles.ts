@@ -6,6 +6,7 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
 	display: flex;
 	flex-direction: column;
-	height: calc(100vh - 100px);
+	height: calc(100vh - 92px);
+	overflow-y: scroll;
 	${({ hasNoSections }) => (hasNoSections ? 'justify-content: center;' : '')}
 `;

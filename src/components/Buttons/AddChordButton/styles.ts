@@ -4,6 +4,7 @@ import { StyledAddButton } from '../AddSectionButton/styles';
 export const StyledAddChordButton = styled(StyledAddButton)`
 	width: 24px;
 	height: 22px;
+	min-height: 22px;
 	font-size: 24px;
 	outline-width: 6px;
 	position: absolute;
@@ -14,4 +15,9 @@ export const StyledAddChordButton = styled(StyledAddButton)`
 	right: 15px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
 `;
