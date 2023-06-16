@@ -26,6 +26,8 @@ function playSectionChords(
 				note => note.name + note.octave
 			);
 
+			const noteVelocity = 1 / notes.length;
+
 			for (let x = 0; x < chord.length; x++) {
 				const timeCode = getTimeCode(measures.count);
 
@@ -33,7 +35,9 @@ function playSectionChords(
 					// set active chord
 					setCurrentChord(chord.id);
 					// play chord
-					notes.forEach(note => synth.triggerAttack(note, time));
+					notes.forEach(note =>
+						synth.triggerAttack(note, time, noteVelocity)
+					);
 					synth.triggerRelease(notes, time + 1);
 				}, timeCode);
 				measures.count += 1;
