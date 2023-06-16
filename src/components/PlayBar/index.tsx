@@ -1,10 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { selectMode, setActiveChord, setMode } from '../../store/appSlice';
-import { StyledPlayBar } from './styles';
+import { OtherButtons, PlayButton, StyledPlayBar } from './styles';
 import * as Tone from 'tone';
 import { playChords } from '../../utils/playChords';
 import { Id } from '../../types';
+import NoteIcon from '../Icons/NoteIcon';
+import MetronomeIcon from '../Icons/MetronomeIcon';
+import PlayIcon from '../Icons/PlayIcon';
 
 // create synth once
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
@@ -36,7 +39,17 @@ export default function PlayBar() {
 	};
 	return (
 		<StyledPlayBar className="play-bar">
-			<button onClick={handlePlay}>{isPlaying ? '||' : '|>'}</button>
+			<PlayButton onClick={handlePlay}>
+				{isPlaying ? '||' : <PlayIcon />}
+			</PlayButton>
+			<OtherButtons>
+				<div>
+					<NoteIcon /> 120bpm
+				</div>
+				<div>
+					<MetronomeIcon /> 3/4
+				</div>
+			</OtherButtons>
 		</StyledPlayBar>
 	);
 }

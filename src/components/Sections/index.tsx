@@ -2,7 +2,8 @@ import { useAppSelector } from '../../app/hooks';
 import { selectSections } from '../../store/sectionsSlice';
 import AddChordButton from '../Buttons/AddChordButton';
 import Chord from '../Chord';
-import { Loops, StyledSection } from './styles';
+import EditSectionRepeatButton from '../EditSectionRepeatButton';
+import { StyledSection } from './styles';
 
 export default function Sections() {
 	const sections = useAppSelector(selectSections);
@@ -10,7 +11,7 @@ export default function Sections() {
 		<>
 			{sections.map(section => (
 				<StyledSection key={section.id}>
-					<Loops>Repeat: {section.repeatCount} times</Loops>
+					<EditSectionRepeatButton count={section.repeatCount} />
 					{section.chords.map(chord => (
 						<Chord key={chord.id} chord={chord} />
 					))}

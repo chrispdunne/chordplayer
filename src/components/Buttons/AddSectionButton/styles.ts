@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledAddButton = styled.button`
 	transition: all 0.25s ease-in-out;
 	cursor: pointer;
-	color: #fff;
+	color: var(--foreground);
 	background-color: var(--orange);
 	appearance: none;
 	font-size: 43px;
@@ -12,11 +12,11 @@ export const StyledAddButton = styled.button`
 	height: 50px;
 	border-radius: 3px;
 	border: 0;
-	outline: 8px solid var(--off-black);
+	outline: 8px solid var(--off-background);
 	margin: 20px auto;
 	line-height: 0;
 	&:hover {
-		background-color: #000;
+		background-color: var(--background);
 		color: var(--orange);
 	}
 `;

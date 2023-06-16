@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react';
-import './App.css';
 import ChordSections from './components/ChordSections';
 import Header from './components/Header';
 import PlayBar from './components/PlayBar';
