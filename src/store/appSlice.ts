@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { Id } from './sectionsSlice';
+import { Id } from '../types';
 
 export type View = 'main' | 'editApp' | 'editSection' | 'editChord';
 

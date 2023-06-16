@@ -2,6 +2,7 @@ import {
 	selectActiveChord,
 	selectActiveSection,
 	selectView,
+	setActiveChord,
 	setActiveSection,
 	setView
 } from '../../store/appSlice';
@@ -31,6 +32,7 @@ export default function EditChord() {
 	const closeModal = () => {
 		dispatch(setView('main'));
 		dispatch(setActiveSection(null));
+		dispatch(setActiveChord(null));
 	};
 	const sectionId = useAppSelector(selectActiveSection);
 	const isVisible =

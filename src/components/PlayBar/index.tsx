@@ -1,13 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { selectMode, setActiveChord, setMode } from '../../store/appSlice';
-import { OtherButtons, PlayButton, StyledPlayBar } from './styles';
+import { OtherButton, OtherButtons, PlayButton, StyledPlayBar } from './styles';
 import * as Tone from 'tone';
 import { playChords } from '../../utils/playChords';
 import { Id } from '../../types';
 import NoteIcon from '../Icons/NoteIcon';
 import MetronomeIcon from '../Icons/MetronomeIcon';
 import PlayIcon from '../Icons/PlayIcon';
+import PauseIcon from '../Icons/PauseIcon';
+import { selectSections } from '../../store/sectionsSlice';
 
 // create synth once
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
@@ -15,6 +17,8 @@ const synth = new Tone.PolySynth(Tone.Synth).toDestination();
 export default function PlayBar() {
 	const dispatch = useDispatch();
 	const isPlaying = useAppSelector(selectMode) === 'play';
+	const isDisabled =
+		useAppSelector(selectSections).length === 0 && !isPlaying;
 	const sections = useAppSelector(state => state.sections);
 	const setCurrentChord = (chordId: Id) => dispatch(setActiveChord(chordId));
 	const handlePlay = () => {
@@ -39,16 +43,19 @@ export default function PlayBar() {
 	};
 	return (
 		<StyledPlayBar className="play-bar">
-			<PlayButton onClick={handlePlay}>
-				{isPlaying ? '||' : <PlayIcon />}
+			<PlayButton onClick={handlePlay} disabled={isDisabled}>
+				{isPlaying ? <PauseIcon /> : <PlayIcon />}
 			</PlayButton>
 			<OtherButtons>
-				<div>
+				<OtherButton title="change bpm" aria-label="change bpm">
 					<NoteIcon /> 120bpm
-				</div>
-				<div>
+				</OtherButton>
+				<OtherButton
+					title="change time signature"
+					aria-label="change time signature"
+				>
 					<MetronomeIcon /> 3/4
-				</div>
+				</OtherButton>
 			</OtherButtons>
 		</StyledPlayBar>
 	);
