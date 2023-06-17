@@ -10,7 +10,7 @@ export default function LengthInput({ value, onChange }: Props) {
 			How many bars:{' '}
 			<NumberInput
 				min={1}
-				max={99}
+				max={4}
 				onChange={e => onChange(e.target.valueAsNumber)}
 				value={value}
 			/>
