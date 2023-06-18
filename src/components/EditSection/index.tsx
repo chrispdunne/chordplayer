@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import {
+	AddOn,
+	AddOnInput,
+	AddOnInputContainer,
+	Label,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -44,20 +48,29 @@ export default function EditSection() {
 				title="close this modal popup"
 				aria-label="close this modal poup"
 			/>
-			<ModalHead>{activeSectionId ? 'Edit' : 'Add'} Section</ModalHead>
-			<ModalBody>
-				Repeat section{' '}
-				<NumberInput
-					min={1}
-					max={99}
-					value={repeatCount}
-					onChange={e => setRepeatCount(e.target.valueAsNumber)}
-				/>{' '}
-				time{repeatCount > 1 && 's'}
-			</ModalBody>
+			<div>
+				<ModalHead>
+					{activeSectionId ? 'Edit' : 'Add'} Section
+				</ModalHead>
+				<ModalBody>
+					<Label>Repeat section</Label>
+					<AddOnInputContainer>
+						<AddOnInput
+							type="number"
+							min={1}
+							max={99}
+							value={repeatCount}
+							onChange={e =>
+								setRepeatCount(e.target.valueAsNumber)
+							}
+						/>
+						<AddOn>time{repeatCount > 1 && 's'}</AddOn>
+					</AddOnInputContainer>
+				</ModalBody>
+			</div>
 			<ModalFoot>
 				<SaveButton onClick={handleSaveSection}>
-					{activeSectionId ? 'Edit' : 'Add'} Section
+					{activeSectionId ? 'Save' : 'Add'} Section
 				</SaveButton>
 			</ModalFoot>
 		</Modal>

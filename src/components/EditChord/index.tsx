@@ -92,22 +92,23 @@ export default function EditChord() {
 					title="close this modal popup"
 					aria-label="close this modal poup"
 				/>
-				<ModalHead>
-					{activeChord !== null ? 'Edit' : 'Add'} Chord
-				</ModalHead>
+				<div>
+					<ModalHead>
+						{activeChord !== null ? 'Edit' : 'Add'} Chord
+					</ModalHead>
 
-				<ModalBody>
-					<KeySelect
-						value={String(key)}
-						onChange={v => setKey(Number(v))}
-					/>
-					<FlavourSelect value={flavour} onChange={setFlavour} />
-					<LengthInput value={length} onChange={setLength} />
-				</ModalBody>
-
+					<ModalBody>
+						<KeySelect
+							value={String(key)}
+							onChange={v => setKey(Number(v))}
+						/>
+						<FlavourSelect value={flavour} onChange={setFlavour} />
+						<LengthInput value={length} onChange={setLength} />
+					</ModalBody>
+				</div>
 				<ModalFoot>
 					<SaveButton onClick={handleSaveChord}>
-						{activeChord !== null ? 'Edit' : 'Add'} Chord
+						{activeChord !== null ? 'Save' : 'Add'} Chord
 					</SaveButton>
 				</ModalFoot>
 			</Modal>

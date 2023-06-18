@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MetronomeIcon from '../Icons/MetronomeIcon';
 import { OtherButton } from './styles';
 import Select from '../Select';
-import { NumberInput } from '../../app/styles';
+import { PlainNumberInput, PlainSelect } from '../../app/styles';
 import * as Tone from 'tone';
 import { useDispatch } from 'react-redux';
 import { setTimeSignature } from '../../store/appSlice';
@@ -30,23 +30,22 @@ export default function TimeSignatureEdit() {
 			aria-label="change time signature"
 		>
 			<MetronomeIcon />
-			<NumberInput
+			<PlainNumberInput
 				max={16}
 				min={1}
 				value={numerator}
 				onChange={e => setNumerator(e.target.valueAsNumber)}
 			/>
 			/
-			<Select
+			<PlainSelect
 				value={String(denominator)}
-				onChange={(v: string) => setDenominator(parseInt(v))}
-				options={[
-					{ value: '2', label: '2' },
-					{ value: '4', label: '4' },
-					{ value: '8', label: '8' },
-					{ value: '16', label: '16' }
-				]}
-			/>
+				onChange={e => setDenominator(parseInt(e.target.value))}
+			>
+				<option value="2"> 2 </option>
+				<option value="4"> 4 </option>
+				<option value="8"> 8 </option>
+				<option value="16"> 16</option>
+			</PlainSelect>
 		</OtherButton>
 	);
 }

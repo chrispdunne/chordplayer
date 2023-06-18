@@ -1,7 +1,7 @@
 import NoteIcon from '../Icons/NoteIcon';
 import { OtherButton } from './styles';
 import * as Tone from 'tone';
-import { NumberInput } from '../../app/styles';
+import { PlainNumberInput } from '../../app/styles';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { selectBpm, setBpm } from '../../store/appSlice';
@@ -16,15 +16,18 @@ export default function BpmEdit() {
 
 	return (
 		<OtherButton title="change bpm" aria-label="change bpm">
-			<NoteIcon />
-			<NumberInput
-				min={40}
-				max={400}
-				step={1}
-				value={bpm}
-				onChange={e => handleSetBpm(e.target.valueAsNumber)}
-			/>
-			bpm
+			<label htmlFor="bpm">
+				<NoteIcon />
+				<PlainNumberInput
+					id="bpm"
+					min={40}
+					max={400}
+					step={1}
+					value={bpm}
+					onChange={e => handleSetBpm(e.target.valueAsNumber)}
+				/>
+				bpm
+			</label>
 		</OtherButton>
 	);
 }

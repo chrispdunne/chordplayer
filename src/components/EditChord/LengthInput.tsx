@@ -1,4 +1,4 @@
-import { NumberInput } from '../../app/styles';
+import { InputContainer, Label, NumberInput } from '../../app/styles';
 
 interface Props {
 	value: number;
@@ -6,14 +6,14 @@ interface Props {
 }
 export default function LengthInput({ value, onChange }: Props) {
 	return (
-		<div>
-			How many bars:{' '}
+		<InputContainer>
+			<Label>How many bars: </Label>
 			<NumberInput
 				min={1}
 				max={4}
 				onChange={e => onChange(e.target.valueAsNumber)}
 				value={value}
 			/>
-		</div>
+		</InputContainer>
 	);
 }

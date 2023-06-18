@@ -1,3 +1,4 @@
+import { InputContainer, Label } from '../../app/styles';
 import { getFlavourEnumKeys } from '../../types';
 import Select from '../Select';
 
@@ -9,8 +10,8 @@ interface Props {
 
 export default function FlavourSelect({ value, onChange }: Props) {
 	return (
-		<div>
-			Which Flavour:{' '}
+		<InputContainer>
+			<Label>Type:</Label>
 			<Select
 				options={flavours.map(flavour => ({
 					value: flavour,
@@ -19,6 +20,6 @@ export default function FlavourSelect({ value, onChange }: Props) {
 				value={value}
 				onChange={onChange}
 			/>
-		</div>
+		</InputContainer>
 	);
 }

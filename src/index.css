@@ -4,9 +4,11 @@
 	--background: #000;
 	--off-background: #1f1f1f;
 	--orange: #ff7929;
+	--orange-contrast: #000;
 	--foreground: #fff;
 	--shadow-color: rgba(255, 255, 255, 0.3);
 	--border-color: rgba(255, 255, 255, 0.1);
+	--border-color-strong: rgba(255, 255, 255, 0.5);
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -16,6 +18,7 @@
 		--foreground: #222;
 		--shadow-color: rgba(0, 0, 0, 0.3);
 		--border-color: rgba(0, 0, 0, 0.1);
+		--border-color-string: rgba(0, 0, 0, 0.5);
 	}
 }
 body {
