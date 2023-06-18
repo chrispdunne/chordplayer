@@ -2,6 +2,7 @@ import * as Tone from 'tone';
 import { getChordNotes } from './getChordNotes';
 import { Chord, Id, Section } from '../types';
 import { getTotalMeasureCount } from './getTotalMeasureCount';
+import { get1BeatDuration } from './timing';
 
 const getTimeCode = (measureCount: number) =>
 	`${String(measureCount).padStart(2, '0')}:00:00`;
@@ -16,6 +17,8 @@ function playSectionChords(
 		type: 'app/setActiveChord';
 	}
 ) {
+	const oneBeatDuration = get1BeatDuration();
+
 	let measures = { count: measureCount };
 	for (let n = 0; n < repeatCount; n++) {
 		chords.forEach((chord, i) => {
@@ -35,10 +38,34 @@ function playSectionChords(
 					// set active chord
 					setCurrentChord(chord.id);
 					// play chord
-					notes.forEach(note =>
-						synth.triggerAttack(note, time, noteVelocity)
-					);
-					synth.triggerRelease(notes, time + 1);
+					notes.forEach(note => {
+						// @TODO handle different time signatures
+						synth.triggerAttackRelease(
+							note,
+							'4n',
+							time,
+							noteVelocity
+						);
+						synth.triggerAttackRelease(
+							note,
+							'4n',
+							time + oneBeatDuration,
+							noteVelocity
+						);
+						synth.triggerAttackRelease(
+							note,
+							'4n',
+							time + oneBeatDuration * 2,
+							noteVelocity
+						);
+						synth.triggerAttackRelease(
+							note,
+							'4n',
+							time + oneBeatDuration * 3,
+							noteVelocity
+						);
+					});
+					// synth.triggerRelease(notes, time + 1);
 				}, timeCode);
 				measures.count += 1;
 			}

@@ -7,7 +7,6 @@ import {
 	StyledAddChordButton
 } from './styles';
 import useSectionHasChords from '../../../hooks/useSectionHasNoChords';
-import { ButtonAddon, ButtonAddonShape } from '../AddSectionButton/styles';
 
 export default function AddChordButton({ sectionId }: { sectionId: Id }) {
 	const dispatch = useDispatch();
