@@ -1,5 +1,4 @@
-import { useAppSelector } from '../../app/hooks';
-import { selectSections } from '../../store/sectionsSlice';
+import useHasNoSections from '../../hooks/useHasNoSections';
 import AddSectionButton from '../Buttons/AddSectionButton';
 import EditApp from '../EditApp';
 import EditChord from '../EditChord';
@@ -8,7 +7,7 @@ import Sections from '../Sections';
 import { Container } from './styles';
 
 export default function ChordSections() {
-	const hasNoSections = useAppSelector(selectSections).length === 0;
+	const hasNoSections = useHasNoSections();
 	return (
 		<Container className="chord-sections" hasNoSections={hasNoSections}>
 			<EditApp />

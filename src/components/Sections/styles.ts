@@ -10,5 +10,4 @@ export const StyledSection = styled.div`
 	padding: 9px;
 	margin: 52px 10px 10px;
 	position: relative;
-	min-height: 57px;
 `;
