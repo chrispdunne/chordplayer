@@ -1,12 +1,13 @@
+import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { flavourMap } from '../../const/flavourMap';
-import { selectActiveChord } from '../../store/appSlice';
 import {
-	Chord as ChordType,
-	FlavourEnum,
-	KeyEnum,
-	getFlavourEnumKeys
-} from '../../types';
+	selectActiveChordId,
+	setActiveChord,
+	setActiveSection,
+	setView
+} from '../../store/appSlice';
+import { Chord as ChordType, FlavourEnum, Id, KeyEnum } from '../../types';
 import { calculateChordRows } from '../../utils/calculateChordRows';
 import { ChordFlavour, ChordKey, ChordName, StyledChord } from './styles';
 
@@ -16,11 +17,21 @@ interface ElProps {
 	length: number;
 }
 
-const El = ({ chord: { key, flavour }, active, length }: ElProps) => {
+const El = ({
+	chord: { key, flavour, id, parentSectionId },
+	active,
+	length
+}: ElProps) => {
+	const dispatch = useDispatch();
 	const flavourLabel =
 		flavourMap[FlavourEnum[flavour as keyof typeof FlavourEnum]];
+	const handleClickChord = () => {
+		dispatch(setActiveChord(id));
+		dispatch(setActiveSection(parentSectionId));
+		dispatch(setView('editChord'));
+	};
 	return (
-		<StyledChord active={active} length={length}>
+		<StyledChord active={active} length={length} onClick={handleClickChord}>
 			<ChordName>
 				<ChordKey>{KeyEnum[key]}</ChordKey>
 				<ChordFlavour>{flavourLabel}</ChordFlavour>
@@ -35,10 +46,10 @@ interface Props {
 }
 
 export default function Chord({ chord, chordMeasureIndex }: Props) {
-	const activeChordId = useAppSelector(selectActiveChord);
+	const activeChordId = useAppSelector(selectActiveChordId);
 	const placementIsOdd = chordMeasureIndex % 2 === 1;
 	const rows = calculateChordRows(chord.length, placementIsOdd);
-	console.log({ rows });
+
 	return rows.map((length, i) => (
 		<El
 			key={i}

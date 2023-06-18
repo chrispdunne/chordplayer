@@ -9,7 +9,11 @@ import {
 	NumberInput,
 	SaveButton
 } from '../../app/styles';
-import { selectActiveSection, selectView, setView } from '../../store/appSlice';
+import {
+	selectActiveSectionId,
+	selectView,
+	setView
+} from '../../store/appSlice';
 import { useDispatch } from 'react-redux';
 import { updateSection } from '../../store/sectionsSlice';
 import { addSection } from '../../store/sectionsSlice';
@@ -22,7 +26,7 @@ export default function EditSection() {
 	};
 
 	const isVisible = useAppSelector(selectView) === 'editSection';
-	const activeSectionId = useAppSelector(selectActiveSection);
+	const activeSectionId = useAppSelector(selectActiveSectionId);
 	const [repeatCount, setRepeatCount] = useState(1);
 
 	const handleSaveSection = () => {

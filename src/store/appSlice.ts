@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { Id } from '../types';
+import { Chord, Id } from '../types';
 
 export type View = 'main' | 'editApp' | 'editSection' | 'editChord';
 
@@ -68,9 +68,29 @@ export default appSlice.reducer;
 export const selectView = (state: RootState) => state.app.view;
 export const selectMode = (state: RootState) => state.app.mode;
 export const selectInit = (state: RootState) => state.app.init;
-export const selectActiveChord = (state: RootState) => state.app.activeChord;
-export const selectActiveSection = (state: RootState) =>
+export const selectActiveChordId = (state: RootState) => state.app.activeChord;
+export const selectActiveSectionId = (state: RootState) =>
 	state.app.activeSection;
+export const selectActiveChord = (state: RootState): Chord | null => {
+	const id = state.app.activeChord;
+	const sectionId = state.app.activeSection;
+	if (id && sectionId) {
+		const section = state.sections.find(
+			section => section.id === sectionId
+		);
+		if (section) {
+			const activeChord = section.chords.find(chord => chord.id === id);
+			if (activeChord) {
+				return activeChord;
+			} else {
+				console.error('Missing chord');
+				return null;
+			}
+		}
+	}
+	return null;
+};
+
 export const selectBpm = (state: RootState) => state.app.bpm;
 export const selectTimeSignature = (state: RootState) =>
 	state.app.timeSignature;

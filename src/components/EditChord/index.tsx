@@ -1,6 +1,6 @@
 import {
 	selectActiveChord,
-	selectActiveSection,
+	selectActiveSectionId,
 	selectView,
 	setActiveChord,
 	setActiveSection,
@@ -34,35 +34,54 @@ export default function EditChord() {
 		dispatch(setActiveSection(null));
 		dispatch(setActiveChord(null));
 	};
-	const sectionId = useAppSelector(selectActiveSection);
+	const sectionId = useAppSelector(selectActiveSectionId);
 	const isVisible =
 		useAppSelector(selectView) === 'editChord' && sectionId !== null;
-	const activeChordId = useAppSelector(selectActiveChord);
+	const activeChord = useAppSelector(selectActiveChord);
 
-	const [key, setKey] = useState<number>(0);
-	const [flavour, setFlavour] = useState<string>(flavours[0]);
-	const [length, setLength] = useState(1);
+	const [key, setKey] = useState<number>(activeChord?.key ?? 0);
+	const [flavour, setFlavour] = useState<string>(
+		activeChord?.flavour ?? flavours[0]
+	);
+	const [length, setLength] = useState(activeChord?.length ?? 1);
+
+	const isDirty =
+		!activeChord ||
+		(activeChord &&
+			(key !== activeChord.key ||
+				flavour !== activeChord.flavour ||
+				length !== activeChord.length));
 
 	const handleSaveChord = isVisible
 		? () => {
-				dispatch(
-					activeChordId !== null
-						? updateChord({
-								sectionId,
-								chord: {
-									id: activeChordId,
-									key,
-									flavour,
-									length
-								}
-						  })
-						: addChord({
-								sectionId,
-								chord: { id: Date.now(), key, flavour, length }
-						  })
-				);
+				if (isDirty && activeChord !== null) {
+					dispatch(
+						updateChord({
+							sectionId,
+							chord: {
+								id: activeChord.id,
+								key,
+								flavour,
+								length
+							}
+						})
+					);
+				} else if (isDirty) {
+					dispatch(
+						addChord({
+							sectionId,
+							chord: {
+								id: Date.now(),
+								key,
+								flavour,
+								length
+							}
+						})
+					);
+				}
 				dispatch(setView('main'));
 				dispatch(setActiveSection(null));
+				dispatch(setActiveChord(null));
 		  }
 		: undefined;
 	return isVisible ? (
@@ -74,7 +93,7 @@ export default function EditChord() {
 					aria-label="close this modal poup"
 				/>
 				<ModalHead>
-					{activeChordId !== null ? 'Edit' : 'Add'} Chord
+					{activeChord !== null ? 'Edit' : 'Add'} Chord
 				</ModalHead>
 
 				<ModalBody>
@@ -88,7 +107,7 @@ export default function EditChord() {
 
 				<ModalFoot>
 					<SaveButton onClick={handleSaveChord}>
-						{activeChordId !== null ? 'Edit' : 'Add'} Chord
+						{activeChord !== null ? 'Edit' : 'Add'} Chord
 					</SaveButton>
 				</ModalFoot>
 			</Modal>

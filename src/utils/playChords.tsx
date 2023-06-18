@@ -71,7 +71,6 @@ export function playChords(
 	});
 
 	Tone.Transport.schedule(time => {
-		console.log({ time }, 'restarting');
 		Tone.Transport.stop();
 		Tone.Transport.start();
 	}, endOfChordsTimeCode);

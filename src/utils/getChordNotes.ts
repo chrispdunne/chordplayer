@@ -3,7 +3,7 @@ import { KeyEnum } from '../types';
 
 const parseNote = (key: number): Note => {
 	const keyCount = getKeyEnumKeys().length;
-	// console.log({ key, keyCount })
+
 	let octave = 3;
 	if (key >= keyCount) {
 		const diff = key - keyCount;

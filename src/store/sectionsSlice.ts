@@ -23,12 +23,16 @@ export const sectionsSlice = createSlice({
 
 		addChord: (
 			state,
-			action: PayloadAction<{ sectionId: Id; chord: Chord }>
+			action: PayloadAction<{
+				sectionId: Id;
+				chord: Omit<Chord, 'parentSectionId'>;
+			}>
 		) => {
 			const { sectionId, chord } = action.payload;
+
 			const section = state.find(section => section.id === sectionId);
 			if (section) {
-				section.chords.push(chord);
+				section.chords.push({ ...chord, parentSectionId: sectionId });
 			}
 		},
 		removeChord: (
@@ -45,13 +49,18 @@ export const sectionsSlice = createSlice({
 		},
 		updateChord: (
 			state,
-			action: PayloadAction<{ sectionId: Id; chord: Chord }>
+			action: PayloadAction<{
+				sectionId: Id;
+				chord: Omit<Chord, 'parentSectionId'>;
+			}>
 		) => {
 			const { sectionId, chord } = action.payload;
 			const section = state.find(section => section.id === sectionId);
 			if (section) {
 				section.chords = section.chords.map(oldChord =>
-					oldChord.id === chord.id ? chord : oldChord
+					oldChord.id === chord.id
+						? { ...chord, parentSectionId: sectionId }
+						: oldChord
 				);
 			}
 		}

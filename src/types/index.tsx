@@ -9,6 +9,7 @@ export interface Chord {
 	key: number;
 	flavour: string;
 	length: number; // in measures
+	parentSectionId: Id;
 }
 
 export interface Section {
