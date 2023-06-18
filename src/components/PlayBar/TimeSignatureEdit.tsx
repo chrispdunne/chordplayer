@@ -4,20 +4,25 @@ import { OtherButton } from './styles';
 import Select from '../Select';
 import { NumberInput } from '../../app/styles';
 import * as Tone from 'tone';
+import { useDispatch } from 'react-redux';
+import { setTimeSignature } from '../../store/appSlice';
 
 export default function TimeSignatureEdit() {
+	const dispatch = useDispatch();
+
 	const [numerator, _setNumerator] = useState(4);
 	const setNumerator = (n: number) => {
 		_setNumerator(n);
 		Tone.Transport.timeSignature = [n, denominator];
 
-		console.log(Tone.Transport.timeSignature);
+		dispatch(setTimeSignature((n / denominator) * 4));
 	};
 
 	const [denominator, _setDenominator] = useState(4);
 	const setDenominator = (n: number) => {
 		_setDenominator(n);
 		Tone.Transport.timeSignature = [numerator, n];
+		dispatch(setTimeSignature((numerator / n) * 4));
 	};
 	return (
 		<OtherButton

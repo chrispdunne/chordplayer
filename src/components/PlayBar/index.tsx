@@ -29,17 +29,14 @@ export default function PlayBar() {
 			// STOP
 
 			Tone.Transport.cancel();
-			Tone.Transport.stop(); //.pause()?
+			Tone.Transport.stop();
 			synth.releaseAll();
 			setCurrentChord(null);
 		} else {
 			synth.releaseAll();
 
 			// PLAY
-			Tone.Transport.bpm.value = 120;
-
 			playChords(synth, sections, setCurrentChord);
-			// Tone.Transport.loop = true;
 			Tone.Transport.start();
 		}
 	};

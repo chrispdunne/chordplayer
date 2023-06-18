@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface AddButtonProps {
-	hasNoSections: boolean;
+	hasNoSections?: boolean;
 }
 
 export const StyledAddButton = styled.button<AddButtonProps>`
@@ -25,7 +25,7 @@ export const StyledAddButton = styled.button<AddButtonProps>`
 		color: var(--orange);
 	}
 	${({ hasNoSections }) =>
-		!hasNoSections &&
+		hasNoSections === false &&
 		css`
 			margin-bottom: 100px;
 		`}

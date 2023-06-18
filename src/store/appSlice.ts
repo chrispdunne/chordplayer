@@ -11,6 +11,8 @@ export interface AppState {
 	init: boolean;
 	activeSection: Id | null;
 	activeChord: Id | null;
+	bpm: number;
+	timeSignature: number;
 }
 
 const initialState: AppState = {
@@ -18,7 +20,9 @@ const initialState: AppState = {
 	view: 'main',
 	init: false,
 	activeSection: null,
-	activeChord: null
+	activeChord: null,
+	bpm: 120,
+	timeSignature: 4
 };
 
 export const appSlice = createSlice({
@@ -39,12 +43,25 @@ export const appSlice = createSlice({
 		},
 		setActiveChord: (state, action: PayloadAction<Id | null>) => {
 			state.activeChord = action.payload;
+		},
+		setBpm: (state, action: PayloadAction<number>) => {
+			state.bpm = action.payload;
+		},
+		setTimeSignature: (state, action: PayloadAction<number>) => {
+			state.timeSignature = action.payload;
 		}
 	}
 });
 
-export const { setMode, setView, init, setActiveSection, setActiveChord } =
-	appSlice.actions;
+export const {
+	setMode,
+	setView,
+	init,
+	setActiveSection,
+	setActiveChord,
+	setBpm,
+	setTimeSignature
+} = appSlice.actions;
 
 export default appSlice.reducer;
 
@@ -54,3 +71,6 @@ export const selectInit = (state: RootState) => state.app.init;
 export const selectActiveChord = (state: RootState) => state.app.activeChord;
 export const selectActiveSection = (state: RootState) =>
 	state.app.activeSection;
+export const selectBpm = (state: RootState) => state.app.bpm;
+export const selectTimeSignature = (state: RootState) =>
+	state.app.timeSignature;

@@ -1,13 +1,16 @@
-import { useState } from 'react';
 import NoteIcon from '../Icons/NoteIcon';
 import { OtherButton } from './styles';
 import * as Tone from 'tone';
 import { NumberInput } from '../../app/styles';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
+import { selectBpm, setBpm } from '../../store/appSlice';
 
 export default function BpmEdit() {
-	const [bpm, _setBpm] = useState(Tone.Transport.bpm.value);
-	const setBpm = (newBpm: number) => {
-		_setBpm(newBpm);
+	const dispatch = useDispatch();
+	const bpm = useAppSelector(selectBpm);
+	const handleSetBpm = (newBpm: number) => {
+		dispatch(setBpm(newBpm));
 		Tone.Transport.bpm.value = newBpm;
 	};
 
@@ -19,7 +22,7 @@ export default function BpmEdit() {
 				max={400}
 				step={1}
 				value={bpm}
-				onChange={e => setBpm(e.target.valueAsNumber)}
+				onChange={e => handleSetBpm(e.target.valueAsNumber)}
 			/>
 			bpm
 		</OtherButton>

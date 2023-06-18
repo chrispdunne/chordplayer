@@ -20,3 +20,7 @@ export const StyledChord = styled.div<StyledChordProps>`
 	grid-column: ${({ length }) => `span ${length}`};
 `;
 export const ChordName = styled.div``;
+export const ChordKey = styled.span``;
+export const ChordFlavour = styled.span`
+	text-transform: initial;
+`;

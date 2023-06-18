@@ -1,8 +1,14 @@
 import { useAppSelector } from '../../app/hooks';
+import { flavourMap } from '../../const/flavourMap';
 import { selectActiveChord } from '../../store/appSlice';
-import { Chord as ChordType, KeyEnum } from '../../types';
+import {
+	Chord as ChordType,
+	FlavourEnum,
+	KeyEnum,
+	getFlavourEnumKeys
+} from '../../types';
 import { calculateChordRows } from '../../utils/calculateChordRows';
-import { ChordName, StyledChord } from './styles';
+import { ChordFlavour, ChordKey, ChordName, StyledChord } from './styles';
 
 interface ElProps {
 	chord: ChordType;
@@ -10,15 +16,18 @@ interface ElProps {
 	length: number;
 }
 
-const El = ({ chord: { key, flavour }, active, length }: ElProps) => (
-	<StyledChord active={active} length={length}>
-		<ChordName>
-			{/* (odd:{placementIsOdd ? 'true' : 'false'}) (rows:{rows}) */}
-			{KeyEnum[key]} {flavour}
-			{/* (length:{chord.length}) */}
-		</ChordName>
-	</StyledChord>
-);
+const El = ({ chord: { key, flavour }, active, length }: ElProps) => {
+	const flavourLabel =
+		flavourMap[FlavourEnum[flavour as keyof typeof FlavourEnum]];
+	return (
+		<StyledChord active={active} length={length}>
+			<ChordName>
+				<ChordKey>{KeyEnum[key]}</ChordKey>
+				<ChordFlavour>{flavourLabel}</ChordFlavour>
+			</ChordName>
+		</StyledChord>
+	);
+};
 
 interface Props {
 	chord: ChordType;
