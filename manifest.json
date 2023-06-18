@@ -1,0 +1,9 @@
+{
+	"name": "Chord Player",
+	"short_name": "chordplayer",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#ff7929",
+	"icons": [{}]
+}
