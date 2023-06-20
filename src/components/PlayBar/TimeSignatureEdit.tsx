@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import MetronomeIcon from '../Icons/MetronomeIcon';
 import { OtherButton } from './styles';
 import Select from '../Select';
@@ -10,12 +10,12 @@ import { setTimeSignature } from '../../store/appSlice';
 export default function TimeSignatureEdit() {
 	const dispatch = useDispatch();
 
-	const [numerator, _setNumerator] = useState(4);
-	const setNumerator = (n: number) => {
-		_setNumerator(n);
-		Tone.Transport.timeSignature = [n, denominator];
-
-		dispatch(setTimeSignature((n / denominator) * 4));
+	const [numerator, _setNumerator] = useState<number>(4);
+	const setNumerator = (e: ChangeEvent<HTMLInputElement>) => {
+		let num = e.target.valueAsNumber;
+		_setNumerator(Number(num));
+		Tone.Transport.timeSignature = [num, denominator];
+		dispatch(setTimeSignature((num / denominator) * 4));
 	};
 
 	const [denominator, _setDenominator] = useState(4);
@@ -33,8 +33,8 @@ export default function TimeSignatureEdit() {
 			<PlainNumberInput
 				max={16}
 				min={1}
-				value={numerator}
-				onChange={e => setNumerator(e.target.valueAsNumber)}
+				value={isNaN(numerator) ? '' : numerator}
+				onChange={setNumerator}
 			/>
 			/
 			<PlainSelect

@@ -4,6 +4,25 @@ import { Chord, Id, Section } from '../types';
 import { getTotalMeasureCount } from './getTotalMeasureCount';
 import { get1BeatDuration } from './timing';
 
+function playChordsEachBeat(
+	note: string,
+	synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>,
+	time: number,
+	veloctiy: number
+) {
+	const timeSignature = Number(Tone.Transport.timeSignature);
+	const oneBeatDuration = get1BeatDuration();
+
+	for (let i = 0; i < timeSignature; i++) {
+		synth.triggerAttackRelease(
+			note,
+			'8n', // duration
+			time + i * oneBeatDuration, // start
+			veloctiy
+		);
+	}
+}
+
 const getTimeCode = (measureCount: number) =>
 	`${String(measureCount).padStart(2, '0')}:00:00`;
 
@@ -17,8 +36,6 @@ function playSectionChords(
 		type: 'app/setActiveChord';
 	}
 ) {
-	const oneBeatDuration = get1BeatDuration();
-
 	let measures = { count: measureCount };
 	for (let n = 0; n < repeatCount; n++) {
 		chords.forEach((chord, i) => {
@@ -39,33 +56,8 @@ function playSectionChords(
 					setCurrentChord(chord.id);
 					// play chord
 					notes.forEach(note => {
-						// @TODO handle different time signatures
-						synth.triggerAttackRelease(
-							note,
-							'4n',
-							time,
-							noteVelocity
-						);
-						synth.triggerAttackRelease(
-							note,
-							'4n',
-							time + oneBeatDuration,
-							noteVelocity
-						);
-						synth.triggerAttackRelease(
-							note,
-							'4n',
-							time + oneBeatDuration * 2,
-							noteVelocity
-						);
-						synth.triggerAttackRelease(
-							note,
-							'4n',
-							time + oneBeatDuration * 3,
-							noteVelocity
-						);
+						playChordsEachBeat(note, synth, time, noteVelocity);
 					});
-					// synth.triggerRelease(notes, time + 1);
 				}, timeCode);
 				measures.count += 1;
 			}
