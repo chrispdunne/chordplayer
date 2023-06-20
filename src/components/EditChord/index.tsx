@@ -23,6 +23,8 @@ import { useDispatch } from 'react-redux';
 import { addChord, updateChord } from '../../store/sectionsSlice';
 import { getFlavourEnumKeys } from '../../types';
 import ClickOutside from '../ClickOutside';
+import DeleteButton from '../Buttons/DeleteButton';
+import DeleteChord from './DeleteChord';
 
 const flavours = getFlavourEnumKeys();
 
@@ -104,8 +106,10 @@ export default function EditChord() {
 						/>
 						<FlavourSelect value={flavour} onChange={setFlavour} />
 						<LengthInput value={length} onChange={setLength} />
+						<DeleteChord />
 					</ModalBody>
 				</div>
+
 				<ModalFoot>
 					<SaveButton onClick={handleSaveChord}>
 						{activeChord !== null ? 'Save' : 'Add'} Chord

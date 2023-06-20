@@ -21,6 +21,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { updateSection } from '../../store/sectionsSlice';
 import { addSection } from '../../store/sectionsSlice';
+import DeleteSection from './DeleteSection';
 
 export default function EditSection() {
 	const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export default function EditSection() {
 						/>
 						<AddOn>time{repeatCount > 1 && 's'}</AddOn>
 					</AddOnInputContainer>
+					<DeleteSection />
 				</ModalBody>
 			</div>
 			<ModalFoot>

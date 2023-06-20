@@ -11,8 +11,8 @@ export const sectionsSlice = createSlice({
 		addSection: (state, action: PayloadAction<Section>) => {
 			state.push(action.payload);
 		},
-		removeSection: (state, action: PayloadAction<number>) => {
-			state = state.filter(section => section.id !== action.payload);
+		removeSection: (state, action: PayloadAction<Id>) => {
+			return state.filter(section => section.id !== action.payload);
 		},
 		updateSection: (state, action: PayloadAction<Partial<Section>>) =>
 			state.map(section =>
