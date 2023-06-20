@@ -7,8 +7,16 @@ interface Props {
 	onClick: () => void;
 }
 export default function DeleteButton({ children, onClick }: Props) {
+	const handleDelete = () => {
+		const confirmed = window.confirm(
+			'Are you sure you want to delete this?'
+		);
+		if (confirmed) {
+			onClick();
+		}
+	};
 	return (
-		<StyledDeleteButton onClick={onClick}>
+		<StyledDeleteButton onClick={handleDelete}>
 			<BinIcon /> {children}
 		</StyledDeleteButton>
 	);
