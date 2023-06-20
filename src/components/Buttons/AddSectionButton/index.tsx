@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { setView } from '../../../store/appSlice';
+import { selectMode, setView } from '../../../store/appSlice';
 import { ButtonAddon, ButtonAddonShape, StyledAddButton } from './styles';
+import { useAppSelector } from '../../../app/hooks';
 
 interface Props {
 	hasNoSections: boolean;
@@ -8,10 +9,12 @@ interface Props {
 
 export default function AddSectionButton({ hasNoSections }: Props) {
 	const dispatch = useDispatch();
+	const mode = useAppSelector(selectMode);
+
 	const addSection = () => {
 		dispatch(setView('editSection'));
 	};
-	return (
+	return mode === 'edit' ? (
 		<>
 			<StyledAddButton
 				className="add-section-button"
@@ -29,5 +32,5 @@ export default function AddSectionButton({ hasNoSections }: Props) {
 				)}
 			</StyledAddButton>
 		</>
-	);
+	) : null;
 }

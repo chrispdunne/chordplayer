@@ -90,7 +90,6 @@ export const selectActiveChord = (state: RootState): Chord | null => {
 	}
 	return null;
 };
-
 export const selectBpm = (state: RootState) => state.app.bpm;
 export const selectTimeSignature = (state: RootState) =>
 	state.app.timeSignature;

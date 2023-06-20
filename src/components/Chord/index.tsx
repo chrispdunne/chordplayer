@@ -3,6 +3,7 @@ import { useAppSelector } from '../../app/hooks';
 import { flavourMap } from '../../const/flavourMap';
 import {
 	selectActiveChordId,
+	selectMode,
 	setActiveChord,
 	setActiveSection,
 	setView
@@ -23,12 +24,15 @@ const El = ({
 	length
 }: ElProps) => {
 	const dispatch = useDispatch();
+	const mode = useAppSelector(selectMode);
 	const flavourLabel =
 		flavourMap[FlavourEnum[flavour as keyof typeof FlavourEnum]];
 	const handleClickChord = () => {
-		dispatch(setActiveChord(id));
-		dispatch(setActiveSection(parentSectionId));
-		dispatch(setView('editChord'));
+		if (mode === 'edit') {
+			dispatch(setActiveChord(id));
+			dispatch(setActiveSection(parentSectionId));
+			dispatch(setView('editChord'));
+		}
 	};
 	return (
 		<StyledChord active={active} length={length} onClick={handleClickChord}>

@@ -27,14 +27,15 @@ export default function PlayBar() {
 
 		if (isPlaying) {
 			// STOP
-
+			synth.volume.value = -99;
 			Tone.Transport.cancel();
 			Tone.Transport.stop();
 			synth.releaseAll();
 			setCurrentChord(null);
 		} else {
+			synth.volume.value = 0;
 			synth.releaseAll();
-
+			console.log({ vol: synth.volume.value });
 			// PLAY
 			playChords(synth, sections, setCurrentChord);
 			Tone.Transport.start();

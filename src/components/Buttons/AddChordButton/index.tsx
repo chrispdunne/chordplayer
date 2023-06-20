@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setActiveSection, setView } from '../../../store/appSlice';
+import { selectMode, setActiveSection, setView } from '../../../store/appSlice';
 import { Id } from '../../../types';
 import {
 	ChordButtonAddon,
@@ -7,8 +7,10 @@ import {
 	StyledAddChordButton
 } from './styles';
 import useSectionHasChords from '../../../hooks/useSectionHasNoChords';
+import { useAppSelector } from '../../../app/hooks';
 
 export default function AddChordButton({ sectionId }: { sectionId: Id }) {
+	const mode = useAppSelector(selectMode);
 	const dispatch = useDispatch();
 	const addChord = () => {
 		dispatch(setView('editChord'));
@@ -16,7 +18,7 @@ export default function AddChordButton({ sectionId }: { sectionId: Id }) {
 	};
 	const doesSectionHaveChords = useSectionHasChords(sectionId);
 
-	return (
+	return mode === 'edit' ? (
 		<StyledAddChordButton
 			className="add-chord-button"
 			onClick={addChord}
@@ -30,5 +32,5 @@ export default function AddChordButton({ sectionId }: { sectionId: Id }) {
 				</ChordButtonAddon>
 			)}
 		</StyledAddChordButton>
-	);
+	) : null;
 }
