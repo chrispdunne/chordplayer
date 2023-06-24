@@ -23,7 +23,6 @@ import { useDispatch } from 'react-redux';
 import { addChord, updateChord } from '../../store/sectionsSlice';
 import { getFlavourEnumKeys } from '../../types';
 import ClickOutside from '../ClickOutside';
-import DeleteButton from '../Buttons/DeleteButton';
 import DeleteChord from './DeleteChord';
 
 const flavours = getFlavourEnumKeys();

@@ -31,6 +31,7 @@ export default function TimeSignatureEdit() {
 		>
 			<MetronomeIcon />
 			<PlainNumberInput
+				id="numerator"
 				max={16}
 				min={1}
 				value={isNaN(numerator) ? '' : numerator}

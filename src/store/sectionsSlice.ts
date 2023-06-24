@@ -63,7 +63,8 @@ export const sectionsSlice = createSlice({
 						: oldChord
 				);
 			}
-		}
+		},
+		clearAll: () => initialState
 	}
 });
 
@@ -73,7 +74,8 @@ export const {
 	updateSection,
 	addChord,
 	removeChord,
-	updateChord
+	updateChord,
+	clearAll
 } = sectionsSlice.actions;
 
 export default sectionsSlice.reducer;

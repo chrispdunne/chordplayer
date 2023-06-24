@@ -52,4 +52,11 @@ export const OtherButton = styled.button`
 	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: bold;
+	input#bpm {
+		width: 40px;
+	}
+	input#numerator {
+		text-align: right;
+		width: 22px;
+	}
 `;

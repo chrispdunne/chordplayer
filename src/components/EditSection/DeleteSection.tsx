@@ -19,7 +19,7 @@ export default function DeleteSection() {
 		}
 	};
 	return sectionId !== null ? (
-		<DeleteButton onClick={handleDeleteSection}>
+		<DeleteButton onClick={handleDeleteSection} title="Delete section">
 			Delete section
 		</DeleteButton>
 	) : null;

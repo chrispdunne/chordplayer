@@ -23,6 +23,8 @@ export default function DeleteChord() {
 		}
 	};
 	return chordId !== null ? (
-		<DeleteButton onClick={handleDeleteChord}>Delete chord</DeleteButton>
+		<DeleteButton onClick={handleDeleteChord} title="Delete chord">
+			Delete chord
+		</DeleteButton>
 	) : null;
 }
