@@ -13,7 +13,7 @@ export default function Header() {
 				aria-label="settings"
 				onClick={() => dispatch(setView('editApp'))}
 			>
-				<BarsIcon width={20} height={20} />
+				<BarsIcon width={28} height={28} />
 			</NavToggle>
 		</StyledHeader>
 	);

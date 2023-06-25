@@ -20,7 +20,7 @@ export default function EditSectionRepeatButton({ count, id }: Props) {
 			aria-label="edit section repeats"
 			onClick={handleEditSection}
 		>
-			<PlayIcon /> X {count}
+			<PlayIcon width={14 * 0.7} height={17 * 0.7} /> x {count}
 		</StyledRepeatButton>
 	);
 }

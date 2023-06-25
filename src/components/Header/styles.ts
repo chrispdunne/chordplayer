@@ -18,5 +18,5 @@ const ButtonStyles = css`
 
 export const NavToggle = styled.button`
 	${ButtonStyles}
-	padding: 20px 20px;
+	padding: 20px 25px;
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Modal = styled.div`
 	position: fixed;
 	z-index: var(--z-index-modal);
-	inset: 20px;
+	inset: 10px;
 	border: 1px solid var(--border-color);
 	border-radius: 7px;
 	background-color: var(--off-background);
@@ -104,11 +104,15 @@ export const AddOnInputContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: 1px solid var(--border-color-strong);
+	border-radius: 3px;
 `;
-export const AddOnInput = styled(Input)``;
+export const AddOnInput = styled(Input)`
+	border: 0;
+`;
 export const AddOn = styled.div`
 	line-height: 1;
-	padding-left: 10px;
+	padding-right: 10px;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 13px;
 `;

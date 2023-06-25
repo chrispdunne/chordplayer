@@ -7,7 +7,7 @@ export const StyledRepeatButton = styled.button`
 	left: 50%;
 	transform: translateX(-50%);
 	position: absolute;
-	top: -43px;
+	top: -36px;
 	background: var(--off-background);
 	border-radius: 7px;
 	padding: 10px 34px;
@@ -15,14 +15,12 @@ export const StyledRepeatButton = styled.button`
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 14px;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 
 	svg {
 		width: 13px;
-		margin-right: 7px;
-		position: relative;
-		top: -1px;
+		margin-right: 5px;
 	}
 `;

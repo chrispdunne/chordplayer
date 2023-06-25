@@ -22,11 +22,11 @@ export const StyledAddChordButton = styled(StyledAddButton)<SACBProps>`
 					height: 22px;
 					min-height: 22px;
 					position: absolute;
-					bottom: -23px;
-					right: 15px;
-					border-top-left-radius: 0;
+					bottom: 0;
+					right: 0;
+					border-bottom-left-radius: 0;
 					border-top-right-radius: 0;
-					outline-width: 6px;
+					outline-width: 0;
 					font-size: 24px;
 			  `
 			: css`

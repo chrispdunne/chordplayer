@@ -10,7 +10,6 @@ import {
 	ModalCloseButton,
 	ModalFoot,
 	ModalHead,
-	NumberInput,
 	SaveButton
 } from '../../app/styles';
 import {

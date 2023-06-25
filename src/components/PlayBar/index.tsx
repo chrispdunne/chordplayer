@@ -44,7 +44,11 @@ export default function PlayBar() {
 	return (
 		<StyledPlayBar className="play-bar">
 			<PlayButton onClick={handlePlay} disabled={isDisabled}>
-				{isPlaying ? <PauseIcon /> : <PlayIcon />}
+				{isPlaying ? (
+					<PauseIcon />
+				) : (
+					<PlayIcon width={32} height={32} />
+				)}
 			</PlayButton>
 			<OtherButtons>
 				<BpmEdit />
