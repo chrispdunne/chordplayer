@@ -8,7 +8,7 @@ import {
 	ModalCloseButton,
 	ModalFoot,
 	ModalHead,
-	SaveButton
+	ProButton
 } from '../../app/styles';
 import DeleteButton from '../Buttons/DeleteButton';
 import { clearAll } from '../../store/sectionsSlice';
@@ -40,6 +40,9 @@ export default function EditApp() {
 						>
 							Clear all chords
 						</DeleteButton>
+						<ProButton>Load</ProButton>
+						<ProButton>Save</ProButton>
+						<ProButton>Chord Options</ProButton>
 					</ModalBody>
 				</div>
 

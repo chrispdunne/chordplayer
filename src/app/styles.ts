@@ -34,6 +34,37 @@ export const PrimaryButton = styled.button`
 	}
 `;
 
+export const SecondaryButton = styled.button`
+	cursor: pointer;
+	border: none;
+	color: var(--foreground);
+	font-weight: bold;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin: 20px 0;
+	padding: 16px 10px;
+	width: 100%;
+	border-radius: 3px;
+	background: var(--border-color);
+`;
+
+export const ProButton = styled(SecondaryButton)`
+	position: relative;
+	&:before {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 12px;
+		content: 'PRO';
+		padding: 5px 5px;
+		background: var(--orange);
+		color: var(--orange-contrast);
+		border-radius: 3px;
+		font-size: 9px;
+		font-weight: bold;
+	}
+`;
+
 export const SaveButton = styled(PrimaryButton)`
 	text-transform: uppercase;
 	font-weight: bold;
