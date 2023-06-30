@@ -52,7 +52,6 @@ export default function EditChord() {
 			(key !== activeChord.key ||
 				flavour !== activeChord.flavour ||
 				length !== activeChord.length));
-	console.log({ isDirty });
 
 	const handleSaveChord = isVisible
 		? () => {
@@ -90,7 +89,6 @@ export default function EditChord() {
 	// when first loading, if editing existing chord, load chord data
 	useEffect(() => {
 		if (isVisible && activeChord !== null) {
-			console.log('LOADING EXISTING CHORD DATA');
 			setKey(activeChord.key);
 			setFlavour(activeChord.flavour);
 			setLength(activeChord.length);

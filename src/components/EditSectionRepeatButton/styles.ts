@@ -7,7 +7,7 @@ export const StyledRepeatButton = styled.button`
 	left: 50%;
 	transform: translateX(-50%);
 	position: absolute;
-	top: -36px;
+	top: -35px;
 	background: var(--off-background);
 	border-radius: 7px;
 	padding: 10px 34px;

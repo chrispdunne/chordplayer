@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { Chord, Id } from '../types';
+import { Chord, Id, Section } from '../types';
 
 export type View = 'main' | 'editApp' | 'editSection' | 'editChord';
 
@@ -87,6 +87,14 @@ export const selectActiveChord = (state: RootState): Chord | null => {
 				return null;
 			}
 		}
+	}
+	return null;
+};
+export const selectActiveSection = (state: RootState): Section | null => {
+	const id = state.app.activeSection;
+	if (id) {
+		const section = state.sections.find(section => section.id === id);
+		return section || null;
 	}
 	return null;
 };

@@ -20,6 +20,7 @@ export const sectionsSlice = createSlice({
 		removeSection: (state, action: PayloadAction<Id>) => {
 			state = state.filter(section => section.id !== action.payload);
 			saveLocalStorageState({ sections: state });
+			return state;
 		},
 		updateSection: (state, action: PayloadAction<Partial<Section>>) => {
 			state = state.map(section =>
@@ -28,6 +29,7 @@ export const sectionsSlice = createSlice({
 					: section
 			);
 			saveLocalStorageState({ sections: state });
+			return state;
 		},
 		addChord: (
 			state,

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import {
 	AddOn,
@@ -13,6 +13,7 @@ import {
 	SaveButton
 } from '../../app/styles';
 import {
+	selectActiveSection,
 	selectActiveSectionId,
 	selectView,
 	setView
@@ -31,6 +32,8 @@ export default function EditSection() {
 
 	const isVisible = useAppSelector(selectView) === 'editSection';
 	const activeSectionId = useAppSelector(selectActiveSectionId);
+	const activeSection = useAppSelector(selectActiveSection);
+
 	const [repeatCount, setRepeatCount] = useState(1);
 
 	const handleSaveSection = () => {
@@ -41,6 +44,14 @@ export default function EditSection() {
 		);
 		dispatch(setView('main'));
 	};
+
+	// when first loading, if editing existing section, load section data
+	useEffect(() => {
+		if (isVisible && activeSection !== null) {
+			console.log('LOADING EXISTING SECTION DATA');
+			setRepeatCount(activeSection.repeatCount);
+		}
+	}, [isVisible, activeSection]);
 	return isVisible ? (
 		<Modal>
 			<ModalCloseButton
