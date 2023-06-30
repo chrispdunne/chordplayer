@@ -30,7 +30,7 @@ export default function TimeSignatureEdit() {
 			title="change time signature"
 			aria-label="change time signature"
 		>
-			<MetronomeIcon />
+			<MetronomeIcon width={20} height={14} />
 			<PlainSelect
 				value={String(numerator)}
 				onChange={e => setNumerator(parseInt(e.target.value))}

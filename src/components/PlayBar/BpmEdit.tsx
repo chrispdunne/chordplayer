@@ -17,7 +17,7 @@ export default function BpmEdit() {
 	return (
 		<OtherButton title="change bpm" aria-label="change bpm">
 			<label htmlFor="bpm">
-				<NoteIcon />
+				<NoteIcon width={10} height={13} />
 				<PlainNumberInput
 					id="bpm"
 					min={40}

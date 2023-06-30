@@ -1,4 +1,6 @@
-export default function BinIcon() {
+import { SVGProps } from 'react';
+
+export default function BinIcon(props: SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			fill="currentColor"
@@ -6,6 +8,7 @@ export default function BinIcon() {
 			width="12px"
 			height="12px"
 			viewBox="0 0 490.646 490.646"
+			{...props}
 		>
 			<path
 				d="M399.179,67.285l-74.794,0.033L324.356,0L166.214,0.066l0.029,67.318l-74.802,0.033l0.025,62.914h307.739L399.179,67.285z
