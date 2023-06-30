@@ -12,11 +12,13 @@ function App() {
 	const isInit = useAppSelector(selectInit);
 
 	const dispatch = useDispatch();
+
 	const handleInitClick = useCallback(() => {
 		if (isInit) return;
 		dispatch(init());
 		Tone.start();
 	}, [dispatch, isInit]);
+
 	useEffect(() => {
 		window.addEventListener('click', handleInitClick);
 		return () => window.removeEventListener('click', handleInitClick);

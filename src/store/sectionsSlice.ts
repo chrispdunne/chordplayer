@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { Chord, Id, Section } from '../types';
+import { saveLocalStorageState } from '../utils/localStorage';
 
 const initialState: Section[] = [];
 
@@ -10,17 +11,24 @@ export const sectionsSlice = createSlice({
 	reducers: {
 		addSection: (state, action: PayloadAction<Section>) => {
 			state.push(action.payload);
+			saveLocalStorageState({ sections: state });
 		},
+		restoreSectionsFromLocalStorage: (
+			_,
+			action: PayloadAction<Section[]>
+		) => action.payload,
 		removeSection: (state, action: PayloadAction<Id>) => {
-			return state.filter(section => section.id !== action.payload);
+			state = state.filter(section => section.id !== action.payload);
+			saveLocalStorageState({ sections: state });
 		},
-		updateSection: (state, action: PayloadAction<Partial<Section>>) =>
-			state.map(section =>
+		updateSection: (state, action: PayloadAction<Partial<Section>>) => {
+			state = state.map(section =>
 				section.id === action.payload.id
 					? { ...section, ...action.payload }
 					: section
-			),
-
+			);
+			saveLocalStorageState({ sections: state });
+		},
 		addChord: (
 			state,
 			action: PayloadAction<{
@@ -29,10 +37,10 @@ export const sectionsSlice = createSlice({
 			}>
 		) => {
 			const { sectionId, chord } = action.payload;
-
 			const section = state.find(section => section.id === sectionId);
 			if (section) {
 				section.chords.push({ ...chord, parentSectionId: sectionId });
+				saveLocalStorageState({ sections: state });
 			}
 		},
 		removeChord: (
@@ -45,6 +53,7 @@ export const sectionsSlice = createSlice({
 				section.chords = section.chords.filter(
 					chord => chord.id !== chordId
 				);
+				saveLocalStorageState({ sections: state });
 			}
 		},
 		updateChord: (
@@ -62,14 +71,19 @@ export const sectionsSlice = createSlice({
 						? { ...chord, parentSectionId: sectionId }
 						: oldChord
 				);
+				saveLocalStorageState({ sections: state });
 			}
 		},
-		clearAll: () => initialState
+		clearAll: () => {
+			saveLocalStorageState({ sections: initialState });
+			return initialState;
+		}
 	}
 });
 
 export const {
 	addSection,
+	restoreSectionsFromLocalStorage,
 	removeSection,
 	updateSection,
 	addChord,
