@@ -40,6 +40,12 @@ export const SaveButton = styled(PrimaryButton)`
 	padding: 15px 20px;
 	border-radius: 3px;
 	width: 100%;
+	&:disabled,
+	&:disabled:hover {
+		background: var(--border-color);
+		color: var(--background);
+		cursor: not-allowed;
+	}
 `;
 
 export const ModalCloseButton = styled.button`

@@ -16,10 +16,13 @@ export const StyledAddButton = styled(PrimaryButton)<AddButtonProps>`
 	line-height: 0;
 	position: relative;
 	${({ hasNoSections }) =>
-		hasNoSections === false &&
-		css`
-			margin-bottom: 100px;
-		`}
+		hasNoSections
+			? css`
+					margin-bottom: 100px;
+			  `
+			: css`
+					margin-bottom: 160px;
+			  `}
 `;
 
 export const ButtonAddon = styled.div`

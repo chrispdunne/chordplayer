@@ -18,7 +18,7 @@ import {
 import KeySelect from './KeySelect';
 import FlavourSelect from './FlavourSelect';
 import LengthInput from './LengthInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addChord, updateChord } from '../../store/sectionsSlice';
 import { getFlavourEnumKeys } from '../../types';
@@ -52,6 +52,7 @@ export default function EditChord() {
 			(key !== activeChord.key ||
 				flavour !== activeChord.flavour ||
 				length !== activeChord.length));
+	console.log({ isDirty });
 
 	const handleSaveChord = isVisible
 		? () => {
@@ -85,6 +86,17 @@ export default function EditChord() {
 				dispatch(setActiveChord(null));
 		  }
 		: undefined;
+
+	// when first loading, if editing existing chord, load chord data
+	useEffect(() => {
+		if (isVisible && activeChord !== null) {
+			console.log('LOADING EXISTING CHORD DATA');
+			setKey(activeChord.key);
+			setFlavour(activeChord.flavour);
+			setLength(activeChord.length);
+		}
+	}, [isVisible, activeChord]);
+
 	return isVisible ? (
 		<ClickOutside onClickOutside={closeModal}>
 			<Modal>
@@ -110,7 +122,11 @@ export default function EditChord() {
 				</div>
 
 				<ModalFoot>
-					<SaveButton onClick={handleSaveChord}>
+					<SaveButton
+						disabled={!isDirty}
+						onClick={handleSaveChord}
+						title={isDirty ? undefined : 'No changes detected'}
+					>
 						{activeChord !== null ? 'Save' : 'Add'} Chord
 					</SaveButton>
 				</ModalFoot>
