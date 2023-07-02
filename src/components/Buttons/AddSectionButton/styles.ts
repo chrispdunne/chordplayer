@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import { PrimaryButton } from '../../../app/styles';
+import { StrongButton } from '../../../app/styles';
 
 interface AddButtonProps {
 	hasNoSections?: boolean;
 }
 
-export const StyledAddButton = styled(PrimaryButton)<AddButtonProps>`
+export const StyledAddButton = styled(StrongButton)<AddButtonProps>`
 	font-size: 43px;
 	font-weight: bold;
 	width: 50px;

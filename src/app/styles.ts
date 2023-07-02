@@ -20,7 +20,7 @@ export const ModalHead = styled.h2`
 export const ModalBody = styled.div``;
 export const ModalFoot = styled.div``;
 
-export const PrimaryButton = styled.button`
+export const StrongButton = styled.button`
 	transition: all 0.25s ease-in-out;
 	cursor: pointer;
 	color: var(--orange-contrast);
@@ -34,10 +34,10 @@ export const PrimaryButton = styled.button`
 	}
 `;
 
-export const SecondaryButton = styled.button`
+export const PrimaryButton = styled.button`
 	cursor: pointer;
 	border: none;
-	color: var(--foreground);
+	color: var(--orange-contrast);
 	font-weight: bold;
 	font-size: 12px;
 	text-transform: uppercase;
@@ -45,6 +45,11 @@ export const SecondaryButton = styled.button`
 	padding: 16px 10px;
 	width: 100%;
 	border-radius: 3px;
+	background: var(--orange);
+`;
+
+export const SecondaryButton = styled(PrimaryButton)`
+	color: var(--foreground);
 	background: var(--border-color);
 `;
 
@@ -65,7 +70,7 @@ export const ProButton = styled(SecondaryButton)`
 	}
 `;
 
-export const SaveButton = styled(PrimaryButton)`
+export const SaveButton = styled(StrongButton)`
 	text-transform: uppercase;
 	font-weight: bold;
 	padding: 15px 20px;
