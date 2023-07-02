@@ -50,6 +50,8 @@ export default function EditApp() {
 						<ProButton>Load</ProButton>
 						<ProButton>Save</ProButton>
 						<ProButton>Chord Options</ProButton>
+						<ProButton>Drums</ProButton>
+						<ProButton>Click</ProButton>
 					</ModalBody>
 				</div>
 
