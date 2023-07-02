@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StyledAddButton } from '../Buttons/AddSectionButton/styles';
+import { aboveMobile } from '../../const/styles';
 
 export const StyledPlayBar = styled.div`
 	position: fixed;
@@ -42,6 +43,8 @@ export const OtherButtons = styled.div`
 	display: flex;
 	justify-content: space-between;
 	color: var(--foreground);
+	max-width: 500px;
+	margin: 0 auto;
 `;
 
 export const OtherButton = styled.button`
@@ -58,5 +61,10 @@ export const OtherButton = styled.button`
 	input#numerator {
 		text-align: right;
 		width: 22px;
+	}
+	@media only screen and (min-width: ${aboveMobile}) {
+		input#bpm {
+			width: 45px;
+		}
 	}
 `;

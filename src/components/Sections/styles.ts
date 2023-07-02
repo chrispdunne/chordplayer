@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import {
+	aboveMobile,
+	aboveTablet,
+	desktop,
+	largeDesktop
+} from '../../const/styles';
 
 export const StyledSection = styled.div`
 	background-color: var(--off-background);
@@ -10,4 +16,16 @@ export const StyledSection = styled.div`
 	padding: 9px;
 	margin: 52px 10px 40px;
 	position: relative;
+	@media only screen and (min-width: ${aboveMobile}) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media only screen and (min-width: ${aboveTablet}) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	@media only screen and (min-width: ${desktop}) {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	@media only screen and (min-width: ${largeDesktop}) {
+		grid-template-columns: repeat(6, 1fr);
+	}
 `;
