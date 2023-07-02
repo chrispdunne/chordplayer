@@ -15,6 +15,7 @@ export const StyledAddButton = styled(PrimaryButton)<AddButtonProps>`
 	margin: 20px auto;
 	line-height: 0;
 	position: relative;
+	left: 4px;
 	${({ hasNoSections }) =>
 		hasNoSections
 			? css`
@@ -35,7 +36,6 @@ export const ButtonAddon = styled.div`
 	color: var(--orange-contrast);
 	display: block;
 	font-size: 12px;
-	z-index: 1;
 	padding: 10px 10px 10px;
 	width: 100px;
 	line-height: 1;

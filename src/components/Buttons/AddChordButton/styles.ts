@@ -14,6 +14,7 @@ export const StyledAddChordButton = styled(StyledAddButton)<SACBProps>`
 	justify-content: center;
 	text-align: center;
 	align-items: center;
+	left: initial;
 
 	${({ doesSectionHaveChords }) =>
 		doesSectionHaveChords

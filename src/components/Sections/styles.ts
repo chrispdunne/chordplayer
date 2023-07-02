@@ -14,7 +14,7 @@ export const StyledSection = styled.div`
 	grid-template-columns: 1fr 1fr;
 	gap: 10px;
 	padding: 9px;
-	margin: 52px 10px 40px;
+	margin: 52px 4px 40px 12px;
 	position: relative;
 	@media only screen and (min-width: ${aboveMobile}) {
 		grid-template-columns: repeat(3, 1fr);

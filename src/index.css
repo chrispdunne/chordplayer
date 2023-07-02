@@ -1,9 +1,19 @@
 :root {
 	--z-index-modal: 100;
-
 	--background: #000;
 	--off-background: #1f1f1f;
 	--orange: #ff7929;
+	--orange-50: rgba(255, 121, 41, 0.5);
+	--orange-40: rgba(255, 121, 41, 0.4);
+	--orange-30: rgba(255, 121, 41, 0.3);
+	--orange-20: rgba(255, 121, 41, 0.2);
+	--orange-10: rgba(255, 121, 41, 0.1);
+	--blue: #29afff;
+	--blue-50: rgba(41, 175, 255, 0.5);
+	--blue-40: rgba(41, 175, 255, 0.4);
+	--blue-30: rgba(41, 175, 255, 0.3);
+	--blue-20: rgba(41, 175, 255, 0.2);
+	--blue-10: rgba(41, 175, 255, 0.1);
 	--orange-contrast: #000;
 	--foreground: #fff;
 	--shadow-color: rgba(255, 255, 255, 0.3);
