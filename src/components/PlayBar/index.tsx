@@ -1,6 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
-import { selectMode, setActiveChord, setMode } from '../../store/appSlice';
+import {
+	selectMode,
+	selectTimeSignature,
+	setActiveChord,
+	setMode
+} from '../../store/appSlice';
 import { OtherButtons, PlayButton, StyledPlayBar } from './styles';
 import * as Tone from 'tone';
 import { playChords } from '../../utils/playChords';
@@ -19,7 +24,9 @@ export default function PlayBar() {
 	const isPlaying = useAppSelector(selectMode) === 'play';
 	const isDisabled =
 		useAppSelector(selectSections).length === 0 && !isPlaying;
-	const sections = useAppSelector(state => state.sections);
+	const sections = useAppSelector(selectSections);
+	const timeSignature = useAppSelector(selectTimeSignature);
+
 	const setCurrentChord = (chordId: Id | null) =>
 		dispatch(setActiveChord(chordId));
 	const handlePlay = () => {
@@ -37,7 +44,7 @@ export default function PlayBar() {
 			synth.releaseAll();
 			console.log({ vol: synth.volume.value });
 			// PLAY
-			playChords(synth, sections, setCurrentChord);
+			playChords(synth, sections, setCurrentChord, timeSignature);
 			Tone.Transport.start();
 		}
 	};

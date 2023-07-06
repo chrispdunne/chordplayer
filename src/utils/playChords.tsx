@@ -1,6 +1,6 @@
 import * as Tone from 'tone';
 import { getChordNotes } from './getChordNotes';
-import { Chord, Id, Section } from '../types';
+import { Id, Section } from '../types';
 import { getTotalMeasureCount } from './getTotalMeasureCount';
 import { get1BeatDuration } from './timing';
 
@@ -8,15 +8,15 @@ function playChordsEachBeat(
 	note: string,
 	synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>,
 	time: number,
-	veloctiy: number
+	veloctiy: number,
+	timeSignature: [number, number]
 ) {
-	const timeSignature = Number(Tone.Transport.timeSignature);
-	const oneBeatDuration = get1BeatDuration();
+	const oneBeatDuration = get1BeatDuration(4 / timeSignature[1]);
 
-	for (let i = 0; i < timeSignature; i++) {
+	for (let i = 0; i < timeSignature[0]; i++) {
 		synth.triggerAttackRelease(
 			note,
-			'8n', // duration
+			`${timeSignature[1] * 2}n`, // duration
 			time + i * oneBeatDuration, // start
 			veloctiy
 		);
@@ -27,9 +27,9 @@ const getTimeCode = (measureCount: number) =>
 	`${String(measureCount).padStart(2, '0')}:00:00`;
 
 function playSectionChords(
-	chords: Chord[],
+	{ chords, repeatCount }: Section,
+	timeSignature: [number, number],
 	synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>,
-	repeatCount: number,
 	measureCount: number,
 	setCurrentChord: (chordId: Id) => {
 		payload: any;
@@ -56,7 +56,13 @@ function playSectionChords(
 					setCurrentChord(chord.id);
 					// play chord
 					notes.forEach(note => {
-						playChordsEachBeat(note, synth, time, noteVelocity);
+						playChordsEachBeat(
+							note,
+							synth,
+							time,
+							noteVelocity,
+							timeSignature
+						);
 					});
 				}, timeCode);
 				measures.count += 1;
@@ -73,7 +79,8 @@ export function playChords(
 	setCurrentChord: (chordId: Id) => {
 		payload: any;
 		type: 'app/setActiveChord';
-	}
+	},
+	timeSignature: [number, number]
 ) {
 	const totalMeasureCount = getTotalMeasureCount(sections);
 	const endOfChordsTimeCode = getTimeCode(totalMeasureCount);
@@ -81,9 +88,9 @@ export function playChords(
 	let measureCount = 0;
 	sections.forEach((section, i) => {
 		measureCount = playSectionChords(
-			section.chords,
+			section,
+			timeSignature,
 			synth,
-			section.repeatCount,
 			measureCount,
 			setCurrentChord
 		);
