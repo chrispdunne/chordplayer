@@ -13,14 +13,14 @@ export default function TimeSignatureEdit() {
 	const setNumerator = (n: number) => {
 		_setNumerator(n);
 		Tone.Transport.timeSignature = [n, denominator];
-		dispatch(setTimeSignature((n / denominator) * 4));
+		dispatch(setTimeSignature([n, denominator]));
 	};
 
 	const [denominator, _setDenominator] = useState(4);
 	const setDenominator = (n: number) => {
 		_setDenominator(n);
 		Tone.Transport.timeSignature = [numerator, n];
-		dispatch(setTimeSignature((numerator / n) * 4));
+		dispatch(setTimeSignature([numerator, n]));
 	};
 	const numeratorOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	const denominatorOptions = [2, 4, 8, 16];

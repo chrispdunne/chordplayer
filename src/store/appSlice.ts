@@ -12,7 +12,7 @@ export interface AppState {
 	activeSection: Id | null;
 	activeChord: Id | null;
 	bpm: number;
-	timeSignature: number;
+	timeSignature: [number, number];
 }
 
 const initialState: AppState = {
@@ -22,7 +22,7 @@ const initialState: AppState = {
 	activeSection: null,
 	activeChord: null,
 	bpm: 120,
-	timeSignature: 4
+	timeSignature: [4, 4]
 };
 
 export const appSlice = createSlice({
@@ -47,7 +47,7 @@ export const appSlice = createSlice({
 		setBpm: (state, action: PayloadAction<number>) => {
 			state.bpm = action.payload;
 		},
-		setTimeSignature: (state, action: PayloadAction<number>) => {
+		setTimeSignature: (state, action: PayloadAction<[number, number]>) => {
 			state.timeSignature = action.payload;
 		}
 	}
