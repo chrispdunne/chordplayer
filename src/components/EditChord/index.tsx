@@ -18,12 +18,13 @@ import {
 import KeySelect from './KeySelect';
 import FlavourSelect from './FlavourSelect';
 import LengthInput from './LengthInput';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addChord, updateChord } from '../../store/sectionsSlice';
 import { getFlavourEnumKeys } from '../../types';
 import ClickOutside from '../ClickOutside';
 import DeleteChord from './DeleteChord';
+import useStateUpdater from '../../hooks/useStateUpdater';
 
 const flavours = getFlavourEnumKeys();
 
@@ -40,11 +41,17 @@ export default function EditChord() {
 		useAppSelector(selectView) === 'editChord' && sectionId !== null;
 	const activeChord = useAppSelector(selectActiveChord);
 
-	const [key, setKey] = useState<number>(activeChord?.key ?? 0);
-	const [flavour, setFlavour] = useState<string>(
+	const saveRef = useRef<HTMLButtonElement>(null);
+
+	// state
+	const [key, _setKey] = useState<number>(activeChord?.key ?? 0);
+	const [flavour, _setFlavour] = useState<string>(
 		activeChord?.flavour ?? flavours[0]
 	);
-	const [length, setLength] = useState(activeChord?.length ?? 1);
+	const [length, _setLength] = useState(activeChord?.length ?? 1);
+	const setKey = useStateUpdater(_setKey, saveRef?.current);
+	const setFlavour = useStateUpdater(_setFlavour, saveRef?.current);
+	const setLength = useStateUpdater(_setLength, saveRef?.current);
 
 	const isDirty =
 		!activeChord ||
@@ -93,7 +100,7 @@ export default function EditChord() {
 			setFlavour(activeChord.flavour);
 			setLength(activeChord.length);
 		}
-	}, [isVisible, activeChord]);
+	}, [isVisible, activeChord, setKey, setFlavour, setLength]);
 
 	return isVisible ? (
 		<ClickOutside onClickOutside={closeModal}>
@@ -121,6 +128,7 @@ export default function EditChord() {
 
 				<ModalFoot>
 					<SaveButton
+						ref={saveRef}
 						disabled={!isDirty}
 						onClick={handleSaveChord}
 						title={isDirty ? undefined : 'No changes detected'}
