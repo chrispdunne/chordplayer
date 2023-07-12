@@ -7,7 +7,9 @@ export default function useStateUpdater(
 	return useCallback(
 		(v?: any) => {
 			callback(v);
-			buttonToFocus?.focus();
+			if (v != null && !isNaN(v)) {
+				buttonToFocus?.focus();
+			}
 		},
 		[callback, buttonToFocus]
 	);

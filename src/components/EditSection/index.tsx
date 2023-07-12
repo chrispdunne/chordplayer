@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import {
 	AddOn,
@@ -22,6 +22,7 @@ import { useDispatch } from 'react-redux';
 import { updateSection } from '../../store/sectionsSlice';
 import { addSection } from '../../store/sectionsSlice';
 import DeleteSection from './DeleteSection';
+import useStateUpdater from '../../hooks/useStateUpdater';
 
 export default function EditSection() {
 	const dispatch = useDispatch();
@@ -34,7 +35,10 @@ export default function EditSection() {
 	const activeSectionId = useAppSelector(selectActiveSectionId);
 	const activeSection = useAppSelector(selectActiveSection);
 
-	const [repeatCount, setRepeatCount] = useState(1);
+	const saveRef = useRef<HTMLButtonElement>(null);
+	// state
+	const [repeatCount, _setRepeatCount] = useState(1);
+	const setRepeatCount = useStateUpdater(_setRepeatCount, saveRef?.current);
 
 	const handleSaveSection = () => {
 		dispatch(
@@ -51,7 +55,7 @@ export default function EditSection() {
 			console.log('LOADING EXISTING SECTION DATA');
 			setRepeatCount(activeSection.repeatCount);
 		}
-	}, [isVisible, activeSection]);
+	}, [isVisible, activeSection, setRepeatCount]);
 	return isVisible ? (
 		<Modal>
 			<ModalCloseButton
@@ -81,7 +85,7 @@ export default function EditSection() {
 				</ModalBody>
 			</div>
 			<ModalFoot>
-				<SaveButton onClick={handleSaveSection}>
+				<SaveButton ref={saveRef} onClick={handleSaveSection}>
 					{activeSectionId ? 'Save' : 'Add'} Section
 				</SaveButton>
 			</ModalFoot>
