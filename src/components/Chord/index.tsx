@@ -11,6 +11,7 @@ import {
 import { Chord as ChordType, FlavourEnum, Id, KeyEnum } from '../../types';
 import { calculateChordRows } from '../../utils/calculateChordRows';
 import { ChordFlavour, ChordKey, ChordName, StyledChord } from './styles';
+import { DragEvent } from 'react';
 
 interface ElProps {
 	chord: ChordType;
@@ -34,8 +35,18 @@ const El = ({
 			dispatch(setView('editChord'));
 		}
 	};
+	const handleDrag = (e: DragEvent<HTMLDivElement>) => {
+		e.dataTransfer.setData('chordId', String(id));
+	};
 	return (
-		<StyledChord active={active} length={length} onClick={handleClickChord}>
+		<StyledChord
+			active={active}
+			draggable={true}
+			id={String(id)}
+			length={length}
+			onClick={handleClickChord}
+			onDragStart={handleDrag}
+		>
 			<ChordName>
 				<ChordKey>{KeyEnum[key]}</ChordKey>
 				<ChordFlavour>{flavourLabel}</ChordFlavour>
