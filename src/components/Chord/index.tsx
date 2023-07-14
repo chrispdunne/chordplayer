@@ -18,12 +18,14 @@ interface ElProps {
 	chord: ChordType;
 	active: boolean;
 	length: number;
+	isDraggingAndFaded: boolean;
 }
 
 const El = ({
 	chord: { key, flavour, id, parentSectionId },
 	active,
-	length
+	length,
+	isDraggingAndFaded
 }: ElProps) => {
 	const dispatch = useDispatch();
 	const mode = useAppSelector(selectMode);
@@ -50,6 +52,7 @@ const El = ({
 		<StyledChord
 			active={active}
 			id={String(id)}
+			isFaded={isDraggingAndFaded}
 			length={length}
 			onClick={handleClickChord}
 			ref={setNodeRef}
@@ -68,18 +71,24 @@ const El = ({
 interface Props {
 	chord: ChordType;
 	chordMeasureIndex: number;
+	draggingChordId: Id | null;
 }
 
-export default function Chord({ chord, chordMeasureIndex }: Props) {
+export default function Chord({
+	chord,
+	chordMeasureIndex,
+	draggingChordId
+}: Props) {
 	const activeChordId = useAppSelector(selectActiveChordId);
 	const placementIsOdd = chordMeasureIndex % 2 === 1;
 	const rows = calculateChordRows(chord.length, placementIsOdd);
-
+	const isDraggingAndFaded = chord.id === draggingChordId;
 	return rows.map((length, i) => (
 		<El
 			key={i}
-			chord={chord}
 			active={activeChordId === chord.id}
+			chord={chord}
+			isDraggingAndFaded={isDraggingAndFaded}
 			length={length}
 		/>
 	));

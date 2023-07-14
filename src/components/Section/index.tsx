@@ -6,6 +6,8 @@ import { StyledSection } from './styles';
 import {
 	DndContext,
 	DragEndEvent,
+	DragOverlay,
+	DragStartEvent,
 	KeyboardSensor,
 	PointerSensor,
 	closestCenter,
@@ -19,6 +21,8 @@ import {
 } from '@dnd-kit/sortable';
 import { useDispatch } from 'react-redux';
 import { swapChords } from '../../store/sectionsSlice';
+import { useState } from 'react';
+import PreviewChord from '../Chord/PreviewChord';
 
 interface Props {
 	chordMeasureIndex: number;
@@ -27,6 +31,15 @@ interface Props {
 
 export default function Section({ chordMeasureIndex, section }: Props) {
 	const dispatch = useDispatch();
+
+	const [draggingChordId, setDraggingChordId] = useState<number | null>(null);
+	const draggingChord = section.chords.find(
+		chord => chord.id === draggingChordId
+	);
+
+	const handleDragStart = (event: DragStartEvent) => {
+		setDraggingChordId(Number(event.active.id));
+	};
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
@@ -40,6 +53,8 @@ export default function Section({ chordMeasureIndex, section }: Props) {
 				})
 			);
 		}
+
+		setDraggingChordId(null);
 	};
 
 	const sensors = useSensors(
@@ -58,6 +73,7 @@ export default function Section({ chordMeasureIndex, section }: Props) {
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCenter}
+				onDragStart={handleDragStart}
 				onDragEnd={handleDragEnd}
 			>
 				<SortableContext
@@ -70,12 +86,17 @@ export default function Section({ chordMeasureIndex, section }: Props) {
 								key={chord.id}
 								chord={chord}
 								chordMeasureIndex={chordMeasureIndex}
+								draggingChordId={draggingChordId}
 							/>
 						);
 						chordMeasureIndex += chord.length;
 						return rtn;
 					})}
 				</SortableContext>
+
+				<DragOverlay>
+					<PreviewChord chord={draggingChord} />
+				</DragOverlay>
 			</DndContext>
 
 			<AddChordButton sectionId={section.id} />

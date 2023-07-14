@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface StyledChordProps {
 	readonly active: boolean;
 	readonly length: number;
+	readonly isFaded?: boolean;
 }
 export const StyledChord = styled.div<StyledChordProps>`
 	background-color: ${({ active }) =>
@@ -18,6 +19,7 @@ export const StyledChord = styled.div<StyledChordProps>`
 	justify-content: center;
 	align-items: center;
 	grid-column: ${({ length }) => `span ${length}`};
+	opacity: ${({ isFaded }) => (isFaded ? 0.5 : 1)};
 `;
 export const ChordName = styled.div``;
 export const ChordKey = styled.span``;
