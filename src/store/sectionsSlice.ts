@@ -76,6 +76,31 @@ export const sectionsSlice = createSlice({
 				saveLocalStorageState({ sections: state });
 			}
 		},
+		swapChords: (
+			state,
+			action: PayloadAction<{
+				sectionId: Id;
+				chordOneId: Id;
+				chordTwoId: Id;
+			}>
+		) => {
+			const { sectionId, chordOneId, chordTwoId } = action.payload;
+			const section = state.find(section => section.id === sectionId);
+			if (section) {
+				const chordOneIndex = section.chords.findIndex(
+					chord => chord.id === chordOneId
+				);
+				const chordTwoIndex = section.chords.findIndex(
+					chord => chord.id === chordTwoId
+				);
+				[section.chords[chordOneIndex], section.chords[chordTwoIndex]] =
+					[
+						section.chords[chordTwoIndex],
+						section.chords[chordOneIndex]
+					];
+				saveLocalStorageState({ sections: state });
+			}
+		},
 		clearAll: () => {
 			saveLocalStorageState({ sections: initialState });
 			return initialState;
@@ -91,6 +116,7 @@ export const {
 	addChord,
 	removeChord,
 	updateChord,
+	swapChords,
 	clearAll
 } = sectionsSlice.actions;
 

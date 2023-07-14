@@ -11,6 +11,8 @@ import {
 import { Chord as ChordType, FlavourEnum, Id, KeyEnum } from '../../types';
 import { calculateChordRows } from '../../utils/calculateChordRows';
 import { ChordFlavour, ChordKey, ChordName, StyledChord } from './styles';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ElProps {
 	chord: ChordType;
@@ -35,12 +37,25 @@ const El = ({
 		}
 	};
 
+	// Drag and drop
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({ id: String(id) });
+
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition
+	};
+
 	return (
 		<StyledChord
 			active={active}
 			id={String(id)}
 			length={length}
 			onClick={handleClickChord}
+			ref={setNodeRef}
+			style={style}
+			{...attributes}
+			{...listeners}
 		>
 			<ChordName>
 				<ChordKey>{KeyEnum[key]}</ChordKey>

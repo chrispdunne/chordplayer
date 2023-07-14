@@ -42,7 +42,6 @@ export default function PlayBar() {
 		} else {
 			synth.volume.value = 0;
 			synth.releaseAll();
-			console.log({ vol: synth.volume.value });
 			// PLAY
 			playChords(synth, sections, setCurrentChord, timeSignature);
 			Tone.Transport.start();

@@ -52,7 +52,6 @@ export default function EditSection() {
 	// when first loading, if editing existing section, load section data
 	useEffect(() => {
 		if (isVisible && activeSection !== null) {
-			console.log('LOADING EXISTING SECTION DATA');
 			setRepeatCount(activeSection.repeatCount);
 		}
 	}, [isVisible, activeSection, setRepeatCount]);
