@@ -11,50 +11,8 @@ interface Props {
 }
 
 export default function Section({ chordMeasureIndex, section }: Props) {
-	const sectionRef = useRef(null);
-	const observerOptions = useMemo(
-		() => ({
-			root: sectionRef.current,
-			rootMargin: '0px',
-			threshold: 1.0
-		}),
-		[]
-	);
-	const callback = (
-		entries: IntersectionObserverEntry[],
-		obs: IntersectionObserver
-	) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				console.log({ entry });
-				console.log('section is intersecting');
-			}
-		});
-	};
-
-	const observer = new IntersectionObserver(callback, observerOptions);
-
-	const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		const draggedChordId = e.dataTransfer.getData('chordId');
-		const draggedChord = document.getElementById(draggedChordId);
-		if (sectionRef.current && draggedChord) {
-			observer.observe(draggedChord);
-		}
-	};
-
-	const handleDrop = (e: DragEvent<HTMLDivElement>) => {
-		console.log('drop');
-		e.preventDefault();
-		const draggedChordId = e.dataTransfer.getData('chordId');
-	};
-
 	return (
-		<StyledSection
-			ref={sectionRef}
-			onDragOver={handleDragOver}
-			onDrop={handleDrop}
-		>
+		<StyledSection>
 			<EditSectionRepeatButton
 				count={section.repeatCount}
 				id={section.id}
